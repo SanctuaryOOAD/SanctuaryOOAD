@@ -11,8 +11,8 @@ package Customer;
  */
 public class Customer_Silver extends Customer {
 
-    public Customer_Silver(String Username, String Name, String Tel, String Email, String IdCardNumber, String Plan) {
-        super(Username, Name, Tel, Email, IdCardNumber, Plan);
+    public Customer_Silver(int PrimaryKey, String Name, String Tel, String Email, String IdCardNumber, String Plan) {
+        super(PrimaryKey, Name, Tel, Email, IdCardNumber, Plan);
     }
     
     @Override

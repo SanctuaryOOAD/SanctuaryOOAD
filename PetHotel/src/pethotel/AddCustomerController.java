@@ -1,0 +1,140 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package pethotel;
+
+import Customer.Customer;
+import Customer.Customer_Gold;
+import Customer.Customer_Platinum;
+import Customer.Customer_Silver;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
+import java.io.IOException;
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
+
+/**
+ * FXML Controller class
+ *
+ * @author Corerid
+ */
+public class AddCustomerController implements Initializable {
+
+    /**
+     * Initializes the controller class.
+     */
+    
+    @FXML
+    private JFXTextField name;
+
+    @FXML
+    private JFXTextField tel;
+
+    @FXML
+    private JFXTextField email;
+
+    @FXML
+    private JFXTextField idCardNumber;
+
+    @FXML
+    private ComboBox plan;
+
+    @FXML
+    private JFXButton confirmButton;
+
+    @FXML
+    private JFXButton back;
+    
+    @FXML
+    public void addData(ActionEvent event) throws IOException{
+        
+        Stage stage;
+        Parent root;
+        
+        String name_s = name.getText();
+        String email_s = email.getText();
+        String tel_s = tel.getText();
+        String idCardNumber_s = idCardNumber.getText();
+        String plan_s = plan.getValue().toString();
+        
+        Customer s;
+		
+	EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Customer.odb");		
+	EntityManager em = emf.createEntityManager();
+                
+        em.getTransaction().begin();
+                
+        Query q2 = em.createQuery("select Username from Customer");
+        Query q3 = em.createQuery("select max(PrimaryKey) from Customer");
+        Query q6 = em.createQuery("SELECT s FROM Customer s"); 
+        
+	//List<Customer> results = q2.getResultList();
+        
+        em.close();
+        emf.close(); //close connection before add data
+        
+        Customer b ;
+        
+        int dummyPrime = 1;
+            
+        switch(plan_s){
+                
+            case "Silver" : b = new Customer_Silver(dummyPrime, name_s, tel_s, email_s, idCardNumber_s, plan_s);    break;
+            case "Gold" : b = new Customer_Gold(dummyPrime, name_s, tel_s, email_s, idCardNumber_s, plan_s);    break;
+            case "Platinum" : b = new Customer_Platinum(dummyPrime, name_s, tel_s, email_s, idCardNumber_s, plan_s);  break;
+            default :   b = new Customer(dummyPrime ,name_s, tel_s, email_s, idCardNumber_s, plan_s);
+                
+        }
+            
+            
+            b.addCustomer(name_s, tel_s, email_s, idCardNumber_s, plan_s);
+         
+            System.out.println("Yeah!");
+//            Parent successParent = FXMLLoader.load(getClass().getResource("SuccessRegisterCustomer.fxml"));
+//            Scene Success = new Scene(successParent);
+//        
+//            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+//        
+//            window.setScene(Success);
+//            window.show();
+
+
+    }
+    
+    public void back(ActionEvent event) throws IOException{
+        
+        Parent reserveLockerParent = FXMLLoader.load(getClass().getResource("StaffDashBoard.fxml"));
+        Scene ReserveLocker = new Scene(reserveLockerParent);
+        
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        
+        window.setScene(ReserveLocker);
+        window.show();
+    }
+        
+    
+    
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+        plan.getItems().addAll("Silver", "Gold", "Platinum");
+    }    
+    
+}
