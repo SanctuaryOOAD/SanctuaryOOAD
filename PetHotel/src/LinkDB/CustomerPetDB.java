@@ -5,16 +5,19 @@
  */
 package LinkDB;
 
+import javax.persistence.Entity;
+
 /**
  *
  * @author natht
  */
+@Entity
 public class CustomerPetDB {
     
         private int primaryKey;
-        private String pet_ID;
+        private int pet_ID;
 
-    public CustomerPetDB(int primaryKey, String pet_ID) {
+    public CustomerPetDB(int primaryKey, int pet_ID) {
         this.primaryKey = primaryKey;
         this.pet_ID = pet_ID;
     }

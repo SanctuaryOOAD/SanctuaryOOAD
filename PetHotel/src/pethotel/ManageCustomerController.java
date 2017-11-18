@@ -40,6 +40,18 @@ public class ManageCustomerController implements Initializable {
     }
     
     @FXML
+    public void changeToAddPet(ActionEvent event) throws IOException{
+        
+        Parent reserveLockerParent = FXMLLoader.load(getClass().getResource("AddPet.fxml"));
+        Scene ReserveLocker = new Scene(reserveLockerParent);
+        
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        
+        window.setScene(ReserveLocker);
+        window.show();
+    }
+    
+    @FXML
     public void back(ActionEvent event) throws IOException{
         
         Parent reserveLockerParent = FXMLLoader.load(getClass().getResource("StaffDashBoard.fxml"));

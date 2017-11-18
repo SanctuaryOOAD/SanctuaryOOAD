@@ -11,7 +11,7 @@ package Pet;
  */
 public class Dog extends Pet{
     
-    public Dog(String pet_ID, String Owner, String name, String animal, String extra, int age) {
+    public Dog(int pet_ID, String Owner, String name, String animal, String extra, int age) {
         super(pet_ID, Owner, name, animal, extra, age);
     }
 

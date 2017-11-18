@@ -6,6 +6,11 @@
 package Customer;
 
 import LinkDB.CustomerPetDB;
+import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.scene.control.TableView;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -37,6 +42,31 @@ public class Customer {
         this.plan = plan;
     }
 
+    public int getPrimaryKey() {
+        return primaryKey;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getTel() {
+        return tel;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getIdcardNumber() {
+        return idcardNumber;
+    }
+
+    public String getPlan() {
+        return plan;
+    }
+
+
     
     
         public void setCost(float cost) {
@@ -51,7 +81,7 @@ public class Customer {
             return this.cost - discount(); 
         }  // Calculate realcost(cost - discount)
         
-        public void AddPet(String pet_ID){
+        public void AddPetCustomer(int pet_ID){
            
         CustomerPetDB obj; //Customer object
 	EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/CustomerPet.odb");		
@@ -64,6 +94,9 @@ public class Customer {
 
 
 	em.getTransaction().commit();
+        
+        
+        
         }
         
         public void addCustomer(String name, String tel, String email, String idcardNumber, String plan){
@@ -74,10 +107,8 @@ public class Customer {
 
 
             em.getTransaction().begin();
-            Query q3 = em.createQuery("select max(PrimaryKey) from Customer ");
-            if (q3.getSingleResult() == null){
-                System.exit(0);
-            }
+            Query q3 = em.createQuery("select max(primaryKey) from Customer ");
+
             System.out.println(q3.getSingleResult());
             int maxPrimaryKey = (int)q3.getSingleResult();
                System.out.println(maxPrimaryKey);
@@ -87,7 +118,24 @@ public class Customer {
 
             em.getTransaction().commit();
         } ///
-    
+        
+        public List getList(){
+        
+                Customer s;
+		
+	EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Customer.odb");		
+	EntityManager em = emf.createEntityManager();
+                
+        em.getTransaction().begin();
+                
+        Query q1 = em.createQuery("SELECT s FROM Customer s");
+        Query q2 = em.createQuery("select Type from Customer");
+        
+        List<Customer> results = q1.getResultList();
+        ObservableList<Customer> results2 = FXCollections.<Customer>observableArrayList(results);
+
+        return results2;
+        }
     
         
         

@@ -40,7 +40,7 @@
             <Font name="paaymaay" size="42.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="checkOut" layoutX="293.0" layoutY="641.0" prefHeight="63.0" prefWidth="300.0" style="-fx-background-color: #3871C8;" text="Add Pet" textFill="WHITE">
+      <JFXButton fx:id="checkOut" layoutX="293.0" layoutY="641.0" onAction="#changeToAddPet" prefHeight="63.0" prefWidth="300.0" style="-fx-background-color: #3871C8;" text="Add Pet" textFill="WHITE">
          <font>
             <Font name="paaymaay" size="42.0" />
          </font>

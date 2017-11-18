@@ -154,3 +154,25 @@ Configuration path: C:\Users\natht\Documents\GitHub\SanctuaryOOAD\PetHotel\objec
 [2017-11-18 16:00:46 #4 store] 
 Database 'C:\Users\natht\Documents\GitHub\SanctuaryOOAD\PetHotel\$dist\db\Customer.odb' is closed by 13432@DESKTOP-CIA7TGO
 
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-18 17:03:36 #1 store] 
+Database 'C:\Users\Corerid\Documents\GitHub\SanctuaryOOAD\PetHotel\$dist\db\Customer.odb' is opened by 9924@Corerid
+
+[2017-11-18 17:03:36 #2 store] 
+Configuration path: C:\Users\Corerid\Documents\GitHub\SanctuaryOOAD\PetHotel\objectdb-2.7.2_05\objectdb.conf
+
+[2017-11-18 17:03:45 #3 store] 
+Database 'C:\Users\Corerid\Documents\GitHub\SanctuaryOOAD\PetHotel\$dist\db\Customer.odb' is closed by 9924@Corerid
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-18 17:05:47 #1 store] 
+Database 'C:\Users\Corerid\Documents\GitHub\SanctuaryOOAD\PetHotel\$dist\db\Customer.odb' is opened by 8528@Corerid
+
+[2017-11-18 17:05:47 #2 store] 
+Configuration path: C:\Users\Corerid\Documents\GitHub\SanctuaryOOAD\PetHotel\objectdb-2.7.2_05\objectdb.conf
+
+[2017-11-18 17:05:52 #3 store] 
+Database 'C:\Users\Corerid\Documents\GitHub\SanctuaryOOAD\PetHotel\$dist\db\Customer.odb' is closed by 8528@Corerid
+
