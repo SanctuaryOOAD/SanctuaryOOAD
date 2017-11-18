@@ -41,7 +41,6 @@ public class StaffDashBoardController implements Initializable {
     @FXML
     private JFXButton logOut;
     
-    @FXML
     public void changeToManageCustomer(ActionEvent event) throws IOException{
         
         Parent loginCustomerParent = FXMLLoader.load(getClass().getResource("ManageCustomer.fxml"));
