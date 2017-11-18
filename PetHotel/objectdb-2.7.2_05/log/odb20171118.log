@@ -126,3 +126,17 @@ Configuration path: C:\Users\Corerid\Documents\GitHub\SanctuaryOOAD\PetHotel\obj
 [2017-11-18 03:54:15 #4 store] 
 Database 'C:\Users\Corerid\Documents\GitHub\SanctuaryOOAD\PetHotel\$dist\db\Customer.odb' is closed by 10296@Corerid
 
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-18 13:56:29 #1 store] 
+Database 'C:\Users\Corerid\Documents\GitHub\SanctuaryOOAD\PetHotel\$dist\db\Customer.odb' has been recovered (tr. 10-10)
+
+[2017-11-18 13:56:29 #2 store] 
+Database 'C:\Users\Corerid\Documents\GitHub\SanctuaryOOAD\PetHotel\$dist\db\Customer.odb' is opened by 15084@Corerid
+
+[2017-11-18 13:56:29 #3 store] 
+Configuration path: C:\Users\Corerid\Documents\GitHub\SanctuaryOOAD\PetHotel\objectdb-2.7.2_05\objectdb.conf
+
+[2017-11-18 13:56:48 #4 store] 
+Database 'C:\Users\Corerid\Documents\GitHub\SanctuaryOOAD\PetHotel\$dist\db\Customer.odb' is closed by 15084@Corerid
+

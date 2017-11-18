@@ -36,15 +36,15 @@ public class StaffDashBoardController implements Initializable {
     private JFXButton checkOut;
 
     @FXML
-    private JFXButton addCustomer;
+    private JFXButton manageCustomer;
 
     @FXML
     private JFXButton logOut;
     
     @FXML
-    public void changeToAddCustomer(ActionEvent event) throws IOException{
+    public void changeToManageCustomer(ActionEvent event) throws IOException{
         
-        Parent loginCustomerParent = FXMLLoader.load(getClass().getResource("AddCustomer.fxml"));
+        Parent loginCustomerParent = FXMLLoader.load(getClass().getResource("ManageCustomer.fxml"));
         Scene LoginCustomer = new Scene(loginCustomerParent);
         
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();

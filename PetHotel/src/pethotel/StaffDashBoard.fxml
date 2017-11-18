@@ -7,8 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #6893DD;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/9.0.1" fx:controller="pethotel.StaffDashBoardController">
+<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #6893DD;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pethotel.StaffDashBoardController">
    <children>
       <ImageView fitHeight="284.0" fitWidth="277.0" layoutX="909.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -25,7 +24,6 @@
             <Image url="@../images/customer.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fitHeight="141.0" fitWidth="140.0" layoutX="94.0" layoutY="427.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/breeds-info.png" />
@@ -37,17 +35,17 @@
          </image>
       </ImageView>
       <JFXButton layoutX="305.0" layoutY="300.0" text="Button" />
-      <JFXButton fx:id="reserveRoom" layoutX="293.0" layoutY="466.0" onAction="#changeToReserveRoom" style="-fx-background-color: #3871C8;" text="Reserve Room" textFill="WHITE">
+      <JFXButton fx:id="reserveRoom" layoutX="293.0" layoutY="466.0" onAction="#changeToReserveRoom" prefHeight="63.0" prefWidth="300.0" style="-fx-background-color: #3871C8;" text="Reserve Room" textFill="WHITE">
          <font>
             <Font name="paaymaay" size="42.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="checkOut" layoutX="293.0" layoutY="641.0" onAction="#changeToCheckOut" prefHeight="63.0" prefWidth="248.0" style="-fx-background-color: #3871C8;" text="Check Out" textFill="WHITE">
+      <JFXButton fx:id="checkOut" layoutX="293.0" layoutY="641.0" onAction="#changeToCheckOut" prefHeight="63.0" prefWidth="300.0" style="-fx-background-color: #3871C8;" text="Check Out" textFill="WHITE">
          <font>
             <Font name="paaymaay" size="42.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="addCustomer" layoutX="293.0" layoutY="294.0" onAction="#changeToAddCustomer" prefHeight="63.0" prefWidth="248.0" style="-fx-background-color: #3871C8;" text="Add Customer" textFill="WHITE">
+      <JFXButton fx:id="manageCustomer" layoutX="293.0" layoutY="294.0" onAction="#changeToManageCustomer" prefHeight="63.0" prefWidth="300.0" style="-fx-background-color: #3871C8;" text="Manage Customer" textFill="WHITE">
          <font>
             <Font name="paaymaay" size="42.0" />
          </font>

@@ -120,7 +120,7 @@ public class AddCustomerController implements Initializable {
     
     public void back(ActionEvent event) throws IOException{
         
-        Parent reserveLockerParent = FXMLLoader.load(getClass().getResource("StaffDashBoard.fxml"));
+        Parent reserveLockerParent = FXMLLoader.load(getClass().getResource("ManageCustomer.fxml"));
         Scene ReserveLocker = new Scene(reserveLockerParent);
         
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
