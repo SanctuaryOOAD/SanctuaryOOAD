@@ -21,6 +21,10 @@ public class CustomerPetDB {
         this.primaryKey = primaryKey;
         this.pet_ID = pet_ID;
     }
+
+    public CustomerPetDB(CustomerPetDB get) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
         
          
     

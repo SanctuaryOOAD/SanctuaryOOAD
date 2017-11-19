@@ -55,7 +55,7 @@
             <Image url="@../images/2000px-Emojione_1F436.svg.png" />
          </image>
       </ImageView>
-      <JFXButton fx:id="logOut" layoutX="1055.0" layoutY="733.0" onAction="#logOut" prefHeight="46.0" prefWidth="127.0" style="-fx-background-color: #3871C8;" text="Log out">
+      <JFXButton fx:id="logOut" layoutX="1055.0" layoutY="733.0" onAction="#logOut" prefHeight="46.0" prefWidth="127.0" style="-fx-background-color: #3871C8;" text="Log out" textFill="WHITE">
          <font>
             <Font name="paaymaay" size="28.0" />
          </font>

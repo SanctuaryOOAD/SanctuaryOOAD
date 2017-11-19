@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #6893DD;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pethotel.AddPetController">
+<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #6893DD;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pethotel.ShowCustomerListController">
    <children>
-      <TableView fx:id="table" layoutX="422.0" layoutY="146.0" onMouseClicked="#addPet" prefHeight="575.0" prefWidth="741.0">
+      <TableView fx:id="table" layoutX="422.0" layoutY="146.0" onMouseClicked="#showMore" prefHeight="575.0" prefWidth="741.0">
         <columns>
           <TableColumn fx:id="id" prefWidth="49.0" text="ID" />
           <TableColumn fx:id="name" prefWidth="204.0" text="Name" />
@@ -32,7 +32,7 @@
             <Font name="paaymaay" size="36.0" />
          </font>
       </Label>
-      <Label layoutX="526.0" layoutY="41.0" text="Add Pet">
+      <Label layoutX="468.0" layoutY="40.0" text="Customer List">
          <font>
             <Font name="paaymaay" size="58.0" />
          </font>

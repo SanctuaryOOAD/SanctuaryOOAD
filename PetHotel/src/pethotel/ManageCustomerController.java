@@ -61,6 +61,17 @@ public class ManageCustomerController implements Initializable {
         
         window.setScene(ReserveLocker);
         window.show();
+    }
+    
+    public void changToShowCustomerList(ActionEvent event) throws IOException{
+        
+        Parent reserveLockerParent = FXMLLoader.load(getClass().getResource("ShowCustomerList.fxml"));
+        Scene ReserveLocker = new Scene(reserveLockerParent);
+        
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        
+        window.setScene(ReserveLocker);
+        window.show();
     } 
     
     @Override

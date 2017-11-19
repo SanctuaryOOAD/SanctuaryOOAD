@@ -45,7 +45,7 @@ import javax.persistence.Query;
  */
 
 
-public class AddPetController implements Initializable {
+public class ShowCustomerListController implements Initializable {
 
     /**
      * Initializes the controller class.
@@ -273,25 +273,25 @@ public class AddPetController implements Initializable {
         table.setItems(filter);
     }
     
-    static public int primaryKeyFromAddPet;
-    static public String customerNameFromAddPet;
+    static public int primaryKeyFromshowmore;
+    static public String customerNameFromshowmore;
      
     @FXML
-    private void addPet(MouseEvent event) throws IOException
+    private void showMore(MouseEvent event) throws IOException
     {
         if (event.getClickCount() == 2) //Checking double click
         {
 
             //getUsername when click at table
-            primaryKeyFromAddPet = table.getSelectionModel().getSelectedItem().getPrimaryKey();
-            System.out.println(primaryKeyFromAddPet);
+            primaryKeyFromshowmore = table.getSelectionModel().getSelectedItem().getPrimaryKey();
+            System.out.println(primaryKeyFromshowmore);
             
-            customerNameFromAddPet = table.getSelectionModel().getSelectedItem().getName();
-            System.out.println(primaryKeyFromAddPet);
+            customerNameFromshowmore = table.getSelectionModel().getSelectedItem().getName();
+            System.out.println(customerNameFromshowmore);
 
             //popup more customer detail
             Stage stage = new Stage();
-            Parent root = FXMLLoader.load(getClass().getResource("AddPetPopup.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("PopupShowCustomerList.fxml"));
             stage.setScene(new Scene(root));
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initOwner(table.getScene().getWindow());

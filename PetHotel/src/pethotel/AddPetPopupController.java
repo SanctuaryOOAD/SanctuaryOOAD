@@ -103,9 +103,15 @@ public class AddPetPopupController implements Initializable {
         
         
         
-            b.addPet(obj.customerNameFromAddPet,name_s, type_s, extra_s, age_s);
+        b.addPet(obj.customerNameFromAddPet,name_s, type_s, extra_s, age_s);
          
-            System.out.println("Yeah!");
+        System.out.println("Yeah!");
+            
+        Stage stage;
+        Parent root;
+        
+        stage = (Stage)back.getScene().getWindow();
+        stage.close();
             
         /////////////// CustomerPetDB Part ////////////////////////////////////
 //        CustomerPetDB obj2;

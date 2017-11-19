@@ -37,6 +37,31 @@ public class Pet {
         this.age = age;
     }
 
+    public int getPet_ID() {
+        return pet_ID;
+    }
+
+    public String getOwner() {
+        return Owner;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getAnimal() {
+        return animal;
+    }
+
+    public String getExtra() {
+        return extra;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+
    
     public void show_info(){
         System.out.println("Pet ID : " + pet_ID + "\nOwner : " + Owner + "\n Name : " + name + "\nAnimal : " + animal + "\nAge : " + age);

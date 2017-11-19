@@ -119,23 +119,23 @@ public class Customer {
             em.getTransaction().commit();
         } ///
         
-        public List getList(){
-        
-                Customer s;
-		
-	EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Customer.odb");		
-	EntityManager em = emf.createEntityManager();
-                
-        em.getTransaction().begin();
-                
-        Query q1 = em.createQuery("SELECT s FROM Customer s");
-        Query q2 = em.createQuery("select Type from Customer");
-        
-        List<Customer> results = q1.getResultList();
-        ObservableList<Customer> results2 = FXCollections.<Customer>observableArrayList(results);
-
-        return results2;
-        }
+//        public List getList(){
+//        
+//                Customer s;
+//		
+//	EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Customer.odb");		
+//	EntityManager em = emf.createEntityManager();
+//                
+//        em.getTransaction().begin();
+//                
+//        Query q1 = em.createQuery("SELECT s FROM Customer s");
+//        Query q2 = em.createQuery("select Type from Customer");
+//        
+//        List<Customer> results = q1.getResultList();
+//        ObservableList<Customer> results2 = FXCollections.<Customer>observableArrayList(results);
+//
+//        return results2;
+//        }
     
         
         
