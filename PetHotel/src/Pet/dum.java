@@ -27,7 +27,7 @@ public class dum {
 //        
 //        em.getTransaction().begin();
 //        
-//        s = new Pet(0, "Corerid", "Hogwarts", "Rabbit", "love banana", 2);
+//        s = new Pet(1, "Tanapat Jamjang", "Kukkai", "Rabbit", "love banana", 2);
 //	em.persist(s);
 //
 //	em.getTransaction().commit();

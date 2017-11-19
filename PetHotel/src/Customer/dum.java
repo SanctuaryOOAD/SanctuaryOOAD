@@ -26,7 +26,7 @@ public class dum {
 //        
 //        em.getTransaction().begin();
 //        
-//        s = new Customer(0, "eiei", "Tanapt Jamjang", "0863533138", "corerid@hotmail.com", "5555");
+//        s = new Customer(1, "Tanapt Jamjang", "0863251568", "corerid@hotmail.com", "1100200963548", "Platinum");
 //	em.persist(s);
 //
 //	em.getTransaction().commit();

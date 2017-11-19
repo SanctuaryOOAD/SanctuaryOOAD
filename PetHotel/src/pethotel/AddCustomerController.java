@@ -40,6 +40,7 @@ public class AddCustomerController implements Initializable {
     /**
      * Initializes the controller class.
      */
+
     
     @FXML
     private JFXTextField name;
@@ -85,7 +86,6 @@ public class AddCustomerController implements Initializable {
         Query q3 = em.createQuery("select max(PrimaryKey) from Customer");
         Query q6 = em.createQuery("SELECT s FROM Customer s"); 
         
-	//List<Customer> results = q2.getResultList();
         
         em.close();
         emf.close(); //close connection before add data
@@ -107,25 +107,37 @@ public class AddCustomerController implements Initializable {
             b.addCustomer(name_s, tel_s, email_s, idCardNumber_s, plan_s);
          
             System.out.println("Yeah!");
-//            Parent successParent = FXMLLoader.load(getClass().getResource("SuccessRegisterCustomer.fxml"));
-//            Scene Success = new Scene(successParent);
-//        
-//            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-//        
-//            window.setScene(Success);
-//            window.show();
+            
+            Parent reserveLockerParent = FXMLLoader.load(getClass().getResource("ManageCustomer.fxml"));
+            Scene manageCustomer = new Scene(reserveLockerParent);
 
+            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+            
+            //popup 
+            Stage stage2 = new Stage();
+            Parent root2 = FXMLLoader.load(getClass().getResource("PopupSuccessAddCustomer.fxml"));
+            stage2.setScene(new Scene(root2));
+            stage2.initModality(Modality.APPLICATION_MODAL);
+            stage2.initOwner(confirmButton.getScene().getWindow());
+            stage2.showAndWait();
+            
+            //wait for return and change scene
+            
+            window.setScene(manageCustomer);
+            window.show();
+            
 
     }
     
     public void back(ActionEvent event) throws IOException{
         
         Parent reserveLockerParent = FXMLLoader.load(getClass().getResource("ManageCustomer.fxml"));
-        Scene ReserveLocker = new Scene(reserveLockerParent);
+        Scene manageCustomer = new Scene(reserveLockerParent);
         
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         
-        window.setScene(ReserveLocker);
+        window.setScene(manageCustomer);
         window.show();
     }
         
