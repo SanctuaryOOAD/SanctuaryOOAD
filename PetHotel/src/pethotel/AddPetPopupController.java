@@ -100,9 +100,7 @@ public class AddPetPopupController implements Initializable {
             default :   b = new Pet(dummyPrime ,obj.customerNameFromAddPet, name_s, type_s, extra_s, age_s);
                 
         }
-        
-        
-        
+
         b.addPet(obj.customerNameFromAddPet,name_s, type_s, extra_s, age_s);
          
         System.out.println("Yeah!");

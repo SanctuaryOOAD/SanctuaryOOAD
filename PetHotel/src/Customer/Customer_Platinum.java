@@ -14,7 +14,10 @@ public class Customer_Platinum extends Customer{
     public Customer_Platinum(int PrimaryKey, String Name, String Tel, String Email, String IdCardNumber, String Plan) {
         super(PrimaryKey, Name, Tel, Email, IdCardNumber, Plan);
     }
-    
+
+    public Customer_Platinum(){
+        
+    }    
     
     @Override
     public float discount() {

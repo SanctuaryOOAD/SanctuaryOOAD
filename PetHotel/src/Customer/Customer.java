@@ -41,6 +41,10 @@ public class Customer {
         this.idcardNumber = idcardNumber;
         this.plan = plan;
     }
+    
+    public Customer(){
+        
+    }
 
     public int getPrimaryKey() {
         return primaryKey;
@@ -104,42 +108,29 @@ public class Customer {
 
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Customer.odb");		
             EntityManager em = emf.createEntityManager();
-
+            
 
             em.getTransaction().begin();
+            em.getMetamodel().entity(Customer.class);
+            
             Query q3 = em.createQuery("select max(primaryKey) from Customer ");
 
             System.out.println(q3.getSingleResult());
-            int maxPrimaryKey = (int)q3.getSingleResult();
-               System.out.println(maxPrimaryKey);
-            s = new Customer(maxPrimaryKey+1, name, tel, email, idcardNumber, plan);
-            em.persist(s);
+            if( q3.getSingleResult() == null){
+                
+                s = new Customer(1, name, tel, email, idcardNumber, plan);
+                em.persist(s);
+                
+            }
+            else{
+                int maxPrimaryKey = (int)q3.getSingleResult();
+                   System.out.println(maxPrimaryKey);
+
+                s = new Customer(maxPrimaryKey+1, name, tel, email, idcardNumber, plan);
+                em.persist(s);
+            }
 
 
             em.getTransaction().commit();
-        } ///
-        
-//        public List getList(){
-//        
-//                Customer s;
-//		
-//	EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Customer.odb");		
-//	EntityManager em = emf.createEntityManager();
-//                
-//        em.getTransaction().begin();
-//                
-//        Query q1 = em.createQuery("SELECT s FROM Customer s");
-//        Query q2 = em.createQuery("select Type from Customer");
-//        
-//        List<Customer> results = q1.getResultList();
-//        ObservableList<Customer> results2 = FXCollections.<Customer>observableArrayList(results);
-//
-//        return results2;
-//        }
-    
-        
-        
-        
-    
-    
+        }
 }

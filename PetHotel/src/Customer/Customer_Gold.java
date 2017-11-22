@@ -15,6 +15,10 @@ public class Customer_Gold extends Customer {
         super(PrimaryKey, Name, Tel, Email, IdCardNumber, Plan);
     }
     
+    public Customer_Gold(){
+        
+    }
+    
     @Override
     public float discount() {
          return (float) (super.cost * .2);

@@ -81,6 +81,8 @@ public class AddCustomerController implements Initializable {
 	EntityManager em = emf.createEntityManager();
                 
         em.getTransaction().begin();
+        
+        em.getMetamodel().entity(Customer.class); // Query empty database
                 
         Query q2 = em.createQuery("select Username from Customer");
         Query q3 = em.createQuery("select max(PrimaryKey) from Customer");

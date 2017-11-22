@@ -82,32 +82,39 @@ public class Pet {
             Query q3 = em.createQuery("select max(pet_ID) from Pet ");
 
             System.out.println(q3.getSingleResult());
-            int maxpet_ID = (int)q3.getSingleResult();
-            System.out.println(maxpet_ID);
-            s = new Pet(maxpet_ID+1, owner, name, type, extra, age);
-            em.persist(s);
+            int maxpet_ID = 0;
+            
+            if(q3.getSingleResult()==null){
+                s = new Pet(1, owner, name, type, extra, age);
+                em.persist(s);
 
+                em.getTransaction().commit();
+            }
+            else{
+                maxpet_ID = (int)q3.getSingleResult();
+                System.out.println(maxpet_ID);
+                s = new Pet(maxpet_ID+1, owner, name, type, extra, age);
+                em.persist(s);
 
-            em.getTransaction().commit();
+                em.getTransaction().commit();
+            }
             
         /////////////// CustomerPetDB Part ////////////////////////////////////
-        AddPetController obj;
-        obj = new AddPetController();
-        
-        CustomerPetDB obj2;
-        
-	EntityManagerFactory emf2 = Persistence.createEntityManagerFactory("$dist/db/CustomerPet.odb");		
-	EntityManager em2 = emf2.createEntityManager();
-        
-        em2.getTransaction().begin();
-        
-        obj2 = new CustomerPetDB(obj.primaryKeyFromAddPet,maxpet_ID+1);
-	em2.persist(obj2);
+            AddPetController obj;
+            obj = new AddPetController();
 
-	em2.getTransaction().commit();
+            CustomerPetDB obj2;
+
+            EntityManagerFactory emf2 = Persistence.createEntityManagerFactory("$dist/db/CustomerPet.odb");		
+            EntityManager em2 = emf2.createEntityManager();
+
+            em2.getTransaction().begin();
+
+            obj2 = new CustomerPetDB(obj.primaryKeyFromAddPet,maxpet_ID+1);
+            em2.persist(obj2);
+
+            em2.getTransaction().commit();
         ///////////////////////////////////////////////////////////////////////
-    } ///
-    
-    
-    
+    }
+ 
 }

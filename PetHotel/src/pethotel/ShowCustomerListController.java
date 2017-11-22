@@ -100,6 +100,8 @@ public class ShowCustomerListController implements Initializable {
 	EntityManager em = emf.createEntityManager();
                 
         em.getTransaction().begin();
+        
+        em.getMetamodel().entity(Customer.class); // Query empty database
                 
         Query q1 = em.createQuery("SELECT s FROM Customer s");
         Query q2 = em.createQuery("select Type from Customer");
@@ -137,7 +139,7 @@ public class ShowCustomerListController implements Initializable {
 	EntityManager em = emf.createEntityManager();
                 
         em.getTransaction().begin();
-                
+        em.getMetamodel().entity(Customer.class);        
         Query q1 = em.createQuery("SELECT s FROM Customer s");
         Query q2 = em.createQuery("select Type from Customer");
         
@@ -173,7 +175,7 @@ public class ShowCustomerListController implements Initializable {
 	EntityManager em = emf.createEntityManager();
                 
         em.getTransaction().begin();
-                
+        em.getMetamodel().entity(Customer.class);        
         Query q1 = em.createQuery("SELECT s FROM Customer s");
         Query q2 = em.createQuery("select Type from Customer");
         
@@ -209,7 +211,7 @@ public class ShowCustomerListController implements Initializable {
 	EntityManager em = emf.createEntityManager();
                 
         em.getTransaction().begin();
-                
+        em.getMetamodel().entity(Customer.class);        
         Query q1 = em.createQuery("SELECT s FROM Customer s");
         Query q2 = em.createQuery("select Type from Customer");
         
@@ -245,7 +247,7 @@ public class ShowCustomerListController implements Initializable {
 	EntityManager em = emf.createEntityManager();
                 
         em.getTransaction().begin();
-                
+        em.getMetamodel().entity(Customer.class);        
         Query q1 = em.createQuery("SELECT s FROM Customer s");
         Query q2 = em.createQuery("select Type from Customer");
         
@@ -336,6 +338,8 @@ public class ShowCustomerListController implements Initializable {
 	EntityManager em = emf.createEntityManager();
                 
         em.getTransaction().begin();
+        
+        em.getMetamodel().entity(Customer.class); // Query empty database
                 
         Query q1 = em.createQuery("SELECT s FROM Customer s");
         Query q2 = em.createQuery("select Type from Customer");

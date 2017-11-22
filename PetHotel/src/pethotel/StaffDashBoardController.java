@@ -55,13 +55,26 @@ public class StaffDashBoardController implements Initializable {
     @FXML
     public void changeToReserveRoom(ActionEvent event) throws IOException{
         
+        Parent reserveRoom = FXMLLoader.load(getClass().getResource("ReserveRoom.fxml"));
+        Scene ReserveRoom = new Scene(reserveRoom);
+        
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        
+        window.setScene(ReserveRoom);
+        window.show();  
 
     }
     
     @FXML
     public void changeToCheckOut(ActionEvent event) throws IOException{
         
-
+        Parent checkOut = FXMLLoader.load(getClass().getResource("checkOut.fxml"));
+        Scene CheckOut = new Scene(checkOut);
+        
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        
+        window.setScene(CheckOut);
+        window.show();
     }
     
     @FXML
