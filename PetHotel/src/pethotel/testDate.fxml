@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pethotel.TestDateController">
+   <children>
+      <JFXDatePicker fx:id="in" layoutX="215.0" layoutY="126.0" />
+      <JFXDatePicker fx:id="out" layoutX="215.0" layoutY="220.0" />
+      <DatePicker fx:id="in2" layoutX="405.0" layoutY="142.0" />
+      <DatePicker fx:id="out2" layoutX="398.0" layoutY="222.0" />
+   </children>
+</AnchorPane>
