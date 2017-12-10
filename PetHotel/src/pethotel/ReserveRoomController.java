@@ -395,9 +395,9 @@ public class ReserveRoomController implements Initializable {
         email_tbl.setCellValueFactory(new PropertyValueFactory<Customer, String>("email"));
         idcardNumber_tbl.setCellValueFactory(new PropertyValueFactory<Customer, String>("idcardNumber"));
         
-          Customer s;
+        Customer s;
 		
-	EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Customer.odb");		
+	EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Database.odb");		
 	EntityManager em = emf.createEntityManager();
                 
         em.getTransaction().begin();

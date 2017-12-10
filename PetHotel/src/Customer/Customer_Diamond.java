@@ -9,26 +9,22 @@ import javax.persistence.MappedSuperclass;
 
 /**
  *
- * @author natht
+ * @author Corerid
  */
 @MappedSuperclass
-public class Customer_Silver extends Customer {
-
-    public Customer_Silver(int PrimaryKey, String Name, String Tel, String Email, String IdCardNumber, String Plan) {
+public class Customer_Diamond extends Customer {
+    
+    public Customer_Diamond(int PrimaryKey, String Name, String Tel, String Email, String IdCardNumber, String Plan) {
         super(PrimaryKey, Name, Tel, Email, IdCardNumber, Plan);
     }
 
-    public Customer_Silver(){
+    public Customer_Diamond(){
         
     }    
     
     @Override
     public float discount() {
-         return (float) (super.cost * .1);
+         return (float) (super.cost * .4);
     }
     
-    
-    
 }
-
-    

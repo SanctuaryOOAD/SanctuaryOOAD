@@ -168,7 +168,7 @@ public class AddPetController implements Initializable {
 
         Customer s;
 		
-	EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Customer.odb");		
+	EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Database.odb");		
 	EntityManager em = emf.createEntityManager();
                 
         em.getTransaction().begin();
@@ -204,7 +204,7 @@ public class AddPetController implements Initializable {
     private void searchTel(KeyEvent event){
         Customer s;
 		
-	EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Customer.odb");		
+	EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Database.odb");		
 	EntityManager em = emf.createEntityManager();
                 
         em.getTransaction().begin();
@@ -240,7 +240,7 @@ public class AddPetController implements Initializable {
     private void searchEmail(KeyEvent event){
         Customer s;
 		
-	EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Customer.odb");		
+	EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Database.odb");		
 	EntityManager em = emf.createEntityManager();
                 
         em.getTransaction().begin();
@@ -276,7 +276,7 @@ public class AddPetController implements Initializable {
     private void searchIdCard(KeyEvent event){
         Customer s;
 		
-	EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Customer.odb");		
+	EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Database.odb");		
 	EntityManager em = emf.createEntityManager();
                 
         em.getTransaction().begin();
@@ -367,7 +367,7 @@ public class AddPetController implements Initializable {
         
         Customer s;
 		
-	EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Customer.odb");		
+	EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Database.odb");		
 	EntityManager em = emf.createEntityManager();
                 
         em.getTransaction().begin();

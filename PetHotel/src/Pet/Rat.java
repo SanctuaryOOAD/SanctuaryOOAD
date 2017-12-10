@@ -5,14 +5,18 @@
  */
 package Pet;
 
+import Customer.Customer;
+import javax.persistence.MappedSuperclass;
+
 /**
  *
  * @author natht
  */
+@MappedSuperclass
 public class Rat extends Pet {
     
-    public Rat(int pet_ID, String Owner, String name, String animal, String extra, int age) {
-        super(pet_ID, Owner, name, animal, extra, age);
+    public Rat(int pet_ID, String name, String animal, String extra, int age, Customer owner) {
+        super(pet_ID, name, animal, extra, age, owner);
     }
 
     @Override

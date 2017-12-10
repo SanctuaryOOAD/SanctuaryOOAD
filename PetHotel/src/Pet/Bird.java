@@ -10,20 +10,16 @@ import javax.persistence.MappedSuperclass;
 
 /**
  *
- * @author natht
+ * @author Corerid
  */
 @MappedSuperclass
-public class Rabbit extends Pet {
-    
-    public Rabbit(int pet_ID, String name, String animal, String extra, int age, Customer owner) {
+public class Bird extends Pet{ 
+    public Bird(int pet_ID, String name, String animal, String extra, int age, Customer owner) {
         super(pet_ID, name, animal, extra, age, owner);
     }
 
     @Override
     public void how_to() {
         super.how_to(); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    
-    
+    } 
 }

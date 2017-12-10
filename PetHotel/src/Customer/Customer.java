@@ -6,16 +6,22 @@
 package Customer;
 
 import LinkDB.CustomerPetDB;
+import Pet.Pet;
+import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.scene.control.TableView;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import static pethotel.AddCustomerController.planFromAddCustomerController;
 
 /**
  *
@@ -24,6 +30,7 @@ import javax.persistence.Query;
 @Entity
 public class Customer {
        
+        @Id
         private int primaryKey;        //Primary Key
 	private String name;
         private String tel;
@@ -32,6 +39,9 @@ public class Customer {
         private String plan;
         
         protected float cost = 0;   //cost
+        
+        @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+        private List<Pet> pets;
 
     public Customer(int primaryKey, String name, String tel, String email, String idcardNumber, String plan) {
         this.primaryKey = primaryKey;
@@ -40,6 +50,7 @@ public class Customer {
         this.email = email;
         this.idcardNumber = idcardNumber;
         this.plan = plan;
+        this.pets = new ArrayList<>();
     }
     
     public Customer(){
@@ -68,6 +79,16 @@ public class Customer {
 
     public String getPlan() {
         return plan;
+    }
+    
+    public void addPet(Pet pet) {
+        pet.setCustomer(this);
+        this.pets.add(pet);
+
+    }
+    
+    public List<Pet> getPets() {
+        return pets;
     }
 
 
@@ -106,7 +127,7 @@ public class Customer {
         public void addCustomer(String name, String tel, String email, String idcardNumber, String plan){
             Customer s;
 
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Customer.odb");		
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Database.odb");		
             EntityManager em = emf.createEntityManager();
             
 
@@ -116,17 +137,37 @@ public class Customer {
             Query q3 = em.createQuery("select max(primaryKey) from Customer ");
 
             System.out.println(q3.getSingleResult());
+     
             if( q3.getSingleResult() == null){
                 
-                s = new Customer(1, name, tel, email, idcardNumber, plan);
-                em.persist(s);
+//                s = new Customer(1, name, tel, email, idcardNumber, plan);
+//                em.persist(s);
                 
+                switch(planFromAddCustomerController){
+                
+                case "Silver" : s = new Customer_Silver(1, name, tel, email, idcardNumber, plan);    break;
+                case "Gold" : s = new Customer_Gold(1, name, tel, email, idcardNumber, plan);    break;
+                case "Platinum" : s = new Customer_Platinum(1, name, tel, email, idcardNumber, plan);  break;
+                default :   s = new Customer(1, name, tel, email, idcardNumber, plan);
+                
+                }
+                em.persist(s);
             }
             else{
                 int maxPrimaryKey = (int)q3.getSingleResult();
                    System.out.println(maxPrimaryKey);
 
-                s = new Customer(maxPrimaryKey+1, name, tel, email, idcardNumber, plan);
+//                s = new Customer(maxPrimaryKey+1, name, tel, email, idcardNumber, plan);
+//                em.persist(s);
+                
+                switch(planFromAddCustomerController){
+                
+                case "Silver" : s = new Customer_Silver(maxPrimaryKey+1, name, tel, email, idcardNumber, plan);    break;
+                case "Gold" : s = new Customer_Gold(maxPrimaryKey+1, name, tel, email, idcardNumber, plan);    break;
+                case "Platinum" : s = new Customer_Platinum(maxPrimaryKey+1, name, tel, email, idcardNumber, plan);  break;
+                default :   s = new Customer(maxPrimaryKey+1, name, tel, email, idcardNumber, plan);
+                
+                }
                 em.persist(s);
             }
 

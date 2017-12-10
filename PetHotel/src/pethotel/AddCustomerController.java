@@ -63,6 +63,8 @@ public class AddCustomerController implements Initializable {
     @FXML
     private JFXButton back;
     
+    static public String planFromAddCustomerController;
+    
     @FXML
     public void addData(ActionEvent event) throws IOException{
         
@@ -74,10 +76,11 @@ public class AddCustomerController implements Initializable {
         String tel_s = tel.getText();
         String idCardNumber_s = idCardNumber.getText();
         String plan_s = plan.getValue().toString();
+        planFromAddCustomerController = plan_s;
         
         Customer s;
 		
-	EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Customer.odb");		
+	EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Database.odb");		
 	EntityManager em = emf.createEntityManager();
                 
         em.getTransaction().begin();

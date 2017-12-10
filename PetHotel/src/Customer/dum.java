@@ -21,7 +21,7 @@ public class dum {
     public static void main(String[] args) {
         
 //        Customer s;
-//	EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Customer.odb");		
+//	EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Database.odb");		
 //	EntityManager em = emf.createEntityManager();
 //        
 //        em.getTransaction().begin();

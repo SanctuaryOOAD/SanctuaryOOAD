@@ -5,10 +5,13 @@
  */
 package Customer;
 
+import javax.persistence.MappedSuperclass;
+
 /**
  *
  * @author natht
  */
+@MappedSuperclass
 public class Customer_Gold extends Customer {
     
     public Customer_Gold(int PrimaryKey, String Name, String Tel, String Email, String IdCardNumber, String Plan) {

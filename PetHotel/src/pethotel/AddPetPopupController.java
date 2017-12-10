@@ -92,16 +92,16 @@ public class AddPetPopupController implements Initializable {
         
         int dummyPrime = 1;
             
-        switch(type_s){
-                
-            case "Cat" : b = new Cat(dummyPrime, obj.customerNameFromAddPet, name_s, type_s, extra_s, age_s);    break;
-            case "Dog" : b = new Dog(dummyPrime, obj.customerNameFromAddPet, name_s, type_s, extra_s, age_s);    break;
-            case "Rabbit" : b = new Rabbit(dummyPrime, obj.customerNameFromAddPet, name_s, type_s, extra_s, age_s);  break;
-            default :   b = new Pet(dummyPrime ,obj.customerNameFromAddPet, name_s, type_s, extra_s, age_s);
-                
-        }
-
-        b.addPet(obj.customerNameFromAddPet,name_s, type_s, extra_s, age_s);
+//        switch(type_s){
+//                
+//            case "Cat" : b = new Cat(dummyPrime, obj.customerNameFromAddPet, name_s, type_s, extra_s, age_s);    break;
+//            case "Dog" : b = new Dog(dummyPrime, obj.customerNameFromAddPet, name_s, type_s, extra_s, age_s);    break;
+//            case "Rabbit" : b = new Rabbit(dummyPrime, obj.customerNameFromAddPet, name_s, type_s, extra_s, age_s);  break;
+//            default :   b = new Pet(dummyPrime ,obj.customerNameFromAddPet, name_s, type_s, extra_s, age_s);
+//                
+//        }
+        b = new Pet();
+        b.addPet(primaryKeyFromAddPet,name_s, type_s, extra_s, age_s);
          
         System.out.println("Yeah!");
             

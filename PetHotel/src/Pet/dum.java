@@ -5,6 +5,7 @@
  */
 package Pet;
 
+import Customer.Customer;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -21,16 +22,19 @@ import java.util.*;
 public class dum {
     public static void main(String[] args) {
         
-//        Pet s;
-//	EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Pet.odb");		
-//	EntityManager em = emf.createEntityManager();
-//        
-//        em.getTransaction().begin();
-//        
-//        s = new Pet(1, "Tanapat Jamjang", "Kukkai", "Rabbit", "love banana", 2);
-//	em.persist(s);
-//
-//	em.getTransaction().commit();
+        Pet s;
+	EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Database.odb");		
+	EntityManager em = emf.createEntityManager();
+        
+        Customer a;
+
+            em.getTransaction().begin();
+            a = em.find(Customer.class,1);
+        
+        s = new Dog(3, "Pom", "Dog", "shit lover", 6, a);
+	em.persist(s);
+
+	em.getTransaction().commit();
 
     }
     
