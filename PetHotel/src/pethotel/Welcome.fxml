@@ -3,30 +3,37 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pethotel.WelcomeController">
-   <children>
-      <ImageView fitHeight="860.0" fitWidth="1200.0" layoutX="3.0" layoutY="86.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/dog2.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="foot" fitHeight="297.0" fitWidth="309.0" layoutX="152.0" layoutY="124.0" onMouseClicked="#chageToStaffLogin" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/sky-blue-dog-paw-clipart.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="labelLogin" layoutX="242.0" layoutY="325.0" onMouseClicked="#chageToStaffLogin" prefHeight="55.0" prefWidth="147.0" text="Log in" textFill="#025b9a">
-         <font>
-            <Font name="paaymaay" size="65.0" />
-         </font>
-      </Label>
-      <Label layoutX="707.0" layoutY="55.0" prefHeight="122.0" prefWidth="465.0" text="The Sanctuary">
-         <font>
-            <Font name="paaymaay" size="96.0" />
-         </font>
-      </Label>
-   </children>
-</AnchorPane>
+
+<BorderPane prefHeight="600.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pethotel.WelcomeController">
+   <center>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #2D3442;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fx:id="foot" fitHeight="183.0" fitWidth="206.0" onMouseClicked="#chageToStaffLogin" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/animal-paw-print.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="labelLogin" onMouseClicked="#chageToStaffLogin" prefHeight="81.0" prefWidth="174.0" text="Log in" textFill="WHITE">
+               <font>
+                  <Font name="Lato Bold Italic" size="65.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+   </center>
+   <right>
+      <VBox alignment="CENTER" prefHeight="600.0" prefWidth="464.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" prefHeight="122.0" prefWidth="465.0" text="The Sanctuary" textFill="#2d3442">
+               <font>
+                  <Font name="Lato Bold Italic" size="60.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+   </right>
+</BorderPane>
