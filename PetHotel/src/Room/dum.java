@@ -5,14 +5,11 @@
  */
 package Room;
 
-
-import LinkDB.CustomerPetDB;
-import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
-import pethotel.ReserveRoomController;
+
 
 /**
  *
@@ -20,9 +17,9 @@ import pethotel.ReserveRoomController;
  */
 public class dum {
     public static void main(String[] args) {
-        Room s;
-	EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Room.odb");		
-	EntityManager em = emf.createEntityManager();
+//        Room s;
+//	EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Database.odb");		
+//	EntityManager em = emf.createEntityManager();
         
         
 //        em.getTransaction().begin();
@@ -41,29 +38,46 @@ public class dum {
 //        
 //        em.getTransaction().commit();
 
+        Room s;
+	EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Database.odb");		
+	EntityManager em = emf.createEntityManager();
+        
+//        Pet a;
+//
+            em.getTransaction().begin();
+//            a = em.find(Pet.class,1);
+//            s = new Suite_Room(36, "Suite", "Available");
+//        em.persist(s);
+        /// Delete ////
 //        em.getTransaction().begin();
-//        
-//        for(int i = 1; i<21; i++){
-//            s = new Room(i, "Standard", "Available");
-//            em.persist(s);
+//        for(int i=1;i<=50;i++){
+//            Query q2 = em.createQuery("DELETE FROM Room s WHERE s.roomNumber = :p");
+//            q2.setParameter("p", i).executeUpdate();
 //        }
-//        
+        ///////////////
+//
+        for(int i = 1; i<51; i++){
+            s = new Room(i, "Available");
+            em.persist(s);
+            //em.getTransaction().commit();
+        }
+//////        em.getTransaction().commit();
 //        for(int i = 21; i<36; i++){
 //            s = new Room(i, "Superior", "Available");
 //            em.persist(s);
 //        }
 //        
 //        for(int i = 36; i<46; i++){
-//            s = new Room(i, "Suite", "Available");
+//            s = new Suite_Room(i, "Suite", "Available");
 //            em.persist(s);
 //        }
-//        
+////        
 //        for(int i = 46; i<=50; i++){
-//            s = new Room(i, "VIP", "Available");
+//            s = new Vip_Room(i, "VIP", "Available");
 //            em.persist(s);
 //        }
 //        
-//        em.getTransaction().commit();
+        em.getTransaction().commit();
 
         
         

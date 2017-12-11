@@ -7,6 +7,8 @@ package Pet;
 
 import Customer.Customer;
 import LinkDB.CustomerPetDB;
+import Room.Room;
+import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
@@ -23,7 +25,7 @@ import pethotel.AddPetController;
  * @author natht
  */
 @Entity
-public class Pet {
+public class Pet implements Serializable {
     
     @Id
     private int pet_ID;  // Primary Key
@@ -33,9 +35,19 @@ public class Pet {
     private String extra;  // extra thing
     private int age;
     
+    private String checkIn;
+    private String checkOut;
+    private int totalDay = 0;
+    private float price;
+    
+    private boolean isStay = false;
+    
     @OneToOne(mappedBy = "pets", cascade = CascadeType.ALL,
            fetch = FetchType.EAGER, optional = false)
     private Customer Owner;
+    
+    @OneToOne
+    private Room room;
 
     public Pet(int pet_ID, String name, String animal, String extra, int age, Customer owner) {
         this.pet_ID = pet_ID;
@@ -45,6 +57,7 @@ public class Pet {
         this.age = age;
         
         owner.addPet(this);
+        //this.room = null;
     }
     
     public Pet(){
@@ -79,8 +92,51 @@ public class Pet {
         this.Owner = customer;
     }
 
+    public boolean isStay() {
+        return isStay;
+    }
 
-   
+    public void setIsStay(boolean isStay) {
+        this.isStay = isStay;
+    }
+
+    public String getCheckIn() {
+        return checkIn;
+    }
+
+    public String getCheckOut() {
+        return checkOut;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setCheckIn(String checkIn) {
+        this.checkIn = checkIn;
+    }
+
+    public void setCheckOut(String checkOut) {
+        this.checkOut = checkOut;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public Customer getOwner() {
+        return Owner;
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setTotalDay(int totalDay) {
+        this.totalDay = totalDay;
+    }
+    
+
     public void show_info(){
         System.out.println("Pet ID : " + pet_ID + "\nOwner : " + Owner + "\n Name : " + name + "\nAnimal : " + animal + "\nAge : " + age);
     } 
@@ -156,6 +212,10 @@ public class Pet {
 //
 //            em2.getTransaction().commit();
 //        ///////////////////////////////////////////////////////////////////////
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
     }
     
  

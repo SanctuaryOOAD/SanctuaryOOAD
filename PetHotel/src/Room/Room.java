@@ -5,10 +5,15 @@
  */
 package Room;
 
+
+import Pet.Pet;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Persistence;
 
 /**
@@ -19,19 +24,29 @@ import javax.persistence.Persistence;
 public class Room {
     
     @Id
-    private int roomNumber;      //Primary Key
-    private String roomClass;            //Small,Medium,Big
+    private int roomNumber;      //Primary Key 
     private String stat;            //Empty,Full
     
+    @OneToOne
+    private Pet pet;
+    
 
-    public Room(int roomNumber, String roomClass, String stat) {
+    public Room(int roomNumber, String stat) {
         this.roomNumber = roomNumber;
-        this.roomClass = roomClass;
         this.stat = stat;
+        
+        
     }
     
     public Room(){
         
+    }
+    
+    public Room(int roomNumber, String roomClass, String stat, Pet pet){
+        this.roomNumber = roomNumber;
+        this.stat = stat;
+        this.pet = pet;
+        this.addPet(pet);
     }
 
     public void setStat(String stat) {
@@ -39,13 +54,9 @@ public class Room {
     }
     
     public float Cost(int day){  //Hour
-        return 0;
+        return 1000*day;
     }
-    
-    public void Addpet(String pet_ID){
-        ///Data Base ////
-    }
-    
+        
     public void AddRoom(){
        
         /////////////////////
@@ -60,16 +71,23 @@ public class Room {
         this.roomNumber = roomNumber;
     }
 
-    public String getRoomClass() {
-        return roomClass;
-    }
 
     public String getStat() {
         return stat;
     }
     
+    public Pet getPet() {
+        return pet;
+    }
+
+    public void setPet(Pet pet) {
+        this.pet = pet;
+    }
     
-    
+   public void addPet(Pet pet){
+       this.pet = pet;
+       this.pet.setRoom(this);
+   } 
     
     
 }

@@ -505,3 +505,36 @@ Configuration path: D:\3D\OOAD\PetHotelV2\PetHotel\objectdb-2.7.2_05\objectdb.co
 [2017-12-10 14:23:42 #4 store] 
 Database 'D:\3D\OOAD\PetHotelV2\PetHotel\$dist\db\Database.odb' is closed by 7164@Corerid
 
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-12-10 16:59:11 #1 store] 
+Database 'D:\3D\OOAD\PetHotelV2\PetHotel\$dist\db\Database.odb' is opened by 564@Corerid
+
+[2017-12-10 16:59:11 #2 store] 
+Configuration path: D:\3D\OOAD\PetHotelV2\PetHotel\objectdb-2.7.2_05\objectdb.conf
+
+[2017-12-10 17:01:35 #3 store] 
+Database 'D:\3D\OOAD\PetHotelV2\PetHotel\$dist\db\Database.odb' is closed by 564@Corerid
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-12-10 17:01:41 #1 store] 
+Database 'D:\3D\OOAD\PetHotelV2\PetHotel\$dist\db\Database.odb' is opened by 9452@Corerid
+
+[2017-12-10 17:01:41 #2 store] 
+Configuration path: D:\3D\OOAD\PetHotelV2\PetHotel\objectdb-2.7.2_05\objectdb.conf
+
+[2017-12-10 17:01:50 #3 store] 
+Database 'D:\3D\OOAD\PetHotelV2\PetHotel\$dist\db\Database.odb' is closed by 9452@Corerid
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-12-10 17:21:17 #1 store] 
+Database 'D:\3D\OOAD\PetHotelV2\PetHotel\$dist\db\Database.odb' is opened by 11652@Corerid
+
+[2017-12-10 17:21:17 #2 store] 
+Configuration path: D:\3D\OOAD\PetHotelV2\PetHotel\objectdb-2.7.2_05\objectdb.conf
+
+[2017-12-10 17:21:26 #3 store] 
+Database 'D:\3D\OOAD\PetHotelV2\PetHotel\$dist\db\Database.odb' is closed by 11652@Corerid
+

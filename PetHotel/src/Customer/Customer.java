@@ -39,6 +39,7 @@ public class Customer {
         private String plan;
         
         protected float cost = 0;   //cost
+        //private int totalDay = 0;
         
         @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
         private List<Pet> pets;
@@ -81,6 +82,7 @@ public class Customer {
         return plan;
     }
     
+    
     public void addPet(Pet pet) {
         pet.setCustomer(this);
         this.pets.add(pet);
@@ -90,6 +92,38 @@ public class Customer {
     public List<Pet> getPets() {
         return pets;
     }
+    
+   public List<String> getPetName(){
+      List<String> petName ;
+      petName = new ArrayList<>();
+        for(Pet i:pets){
+            petName.add(i.getName());
+            
+//            if(i == null){
+//                break;
+//            }
+        }
+      return petName; 
+   }
+   
+   public List<Integer> getPetID(){
+      List<Integer> petID ;
+      petID = new ArrayList<>();
+        for(Pet i:pets){
+            petID.add(i.getPet_ID());
+            
+//            if(i == null){
+//                break;
+//            }
+        }
+      return petID; 
+   }
+
+    public float getCost() {
+        return cost;
+    }
+   
+   
 
 
     

@@ -107,7 +107,7 @@ public class PopupShowCustomerListController implements Initializable {
         
 //        ////////////////// Table //////////////////////////////////
         List<Pet> myList = new ArrayList<Pet>();
-        Query q6 = em.createQuery("SELECT s FROM Customer s WHERE s.name = \"corerid\"", Customer.class);
+        //Query q6 = em.createQuery("SELECT s FROM Customer s WHERE s.name = \"corerid\"", Customer.class);
         Query q7 = em.createQuery("SELECT s FROM Customer s WHERE s.primaryKey = :PrimaryKey", Customer.class);
         
             //  Customer cus2 = (Customer)q5.getSingleResult();

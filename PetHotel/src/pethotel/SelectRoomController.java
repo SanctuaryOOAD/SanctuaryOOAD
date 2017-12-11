@@ -13,10 +13,6 @@ import LinkDB.CustomerPetDB;
 import LinkDB.CustomerRoomPetDB;
 import Pet.Pet;
 import Room.Room;
-import Room.Standard_Room;
-import Room.Suite_Room;
-import Room.Superior_Room;
-import Room.Vip_Room;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
@@ -62,6 +58,8 @@ import static pethotel.AddPetController.customerNameFromAddPet;
 import static pethotel.AddPetController.primaryKeyFromAddPet;
 import static pethotel.ReserveRoomController.customerName_tbl;
 import static pethotel.ReserveRoomController.primaryKey_tbl;
+import static pethotel.SelectPetAndDateController.checkIn_String;
+import static pethotel.SelectPetAndDateController.checkOut_String;
 import static pethotel.SelectPetAndDateController.petIDFromSelectPet;
 import static pethotel.SelectPetAndDateController.totalDay;
 
@@ -138,42 +136,42 @@ public class SelectRoomController implements Initializable {
     /**
      * Initializes the controller class.
      */
-     @FXML
-    private void searchRoomClass(MouseEvent event){
-        Room s;
-		
-	EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Room.odb");		
-	EntityManager em = emf.createEntityManager();
-                
-        em.getTransaction().begin();
-                
-        Query q1 = em.createQuery("SELECT s FROM Room s");
-        Query q2 = em.createQuery("select Type from Room");
-        
-        List<Room> results = q1.getResultList();
-        ObservableList<Room> results2 = FXCollections.<Room>observableArrayList(results);
-        
-        FilteredList filter = new FilteredList(results2, e->true);
-        System.out.println(""+roomClass.idProperty());
-        roomClass.promptTextProperty().addListener((observable, oldValue, newValue)->{
-            filter.setPredicate((Predicate<? super Room>)(Room std)->{
-
-                if(newValue.isEmpty() || newValue == null){
-                    return true;
-                }
-                else if(std.getRoomClass().contains(newValue)){
-                    return true;
-                }
-
-                return false;
-            });
-        });
-        
-        SortedList sort = new SortedList(filter);
-        sort.comparatorProperty().bind(tbl.comparatorProperty());
-        tbl.setItems(filter);
-
-    }
+//     @FXML
+//    private void searchRoomClass(MouseEvent event){
+//        Room s;
+//		
+//	EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/RoomDB.odb");		
+//	EntityManager em = emf.createEntityManager();
+//                
+//        em.getTransaction().begin();
+//                
+//        Query q1 = em.createQuery("SELECT s FROM Room s");
+//        Query q2 = em.createQuery("select Type from Room");
+//        
+//        List<Room> results = q1.getResultList();
+//        ObservableList<Room> results2 = FXCollections.<Room>observableArrayList(results);
+//        
+//        FilteredList filter = new FilteredList(results2, e->true);
+//        System.out.println(""+roomClass.idProperty());
+//        roomClass.promptTextProperty().addListener((observable, oldValue, newValue)->{
+//            filter.setPredicate((Predicate<? super Room>)(Room std)->{
+//
+//                if(newValue.isEmpty() || newValue == null){
+//                    return true;
+//                }
+//                else if(std.getRoomClass().contains(newValue)){
+//                    return true;
+//                }
+//
+//                return false;
+//            });
+//        });
+//        
+//        SortedList sort = new SortedList(filter);
+//        sort.comparatorProperty().bind(tbl.comparatorProperty());
+//        tbl.setItems(filter);
+//
+//    }
         
     
 //    @FXML
@@ -254,7 +252,7 @@ public class SelectRoomController implements Initializable {
             
             String roomNumber_S = String.valueOf(tbl.getSelectionModel().getSelectedItem().getRoomNumber());
             
-            selected_roomType = tbl.getSelectionModel().getSelectedItem().getRoomClass();
+            //selected_roomType = tbl.getSelectionModel().getSelectedItem().getRoomClass();
             
 //            Room obj;
 //
@@ -274,19 +272,20 @@ public class SelectRoomController implements Initializable {
             
             Room obj;
 
-            switch(selected_roomType){
-
-                case "Standard" : obj = new Standard_Room();    break;
-                case "Superior" : obj = new Superior_Room();    break;
-                case "Suite" : obj = new Suite_Room();  break;
-                case "VIP" : obj = new Vip_Room();  break;
-                default :   obj = new Room(); break;  
-            }
+//            switch(selected_roomType){
+//
+//                case "Standard" : obj = new Standard_Room();    break;
+//                case "Superior" : obj = new Superior_Room();    break;
+//                case "Suite" : obj = new Suite_Room();  break;
+//                case "VIP" : obj = new Vip_Room();  break;
+//                default :   obj = new Room(); break;  
+//            }
+            obj = new Room(); 
             
             float priceBefore = obj.Cost(selectPetObj.totalDay);
             
             ////////////////////
-            EntityManagerFactory emf2 = Persistence.createEntityManagerFactory("$dist/db/Customer.odb");		
+            EntityManagerFactory emf2 = Persistence.createEntityManagerFactory("$dist/db/Database.odb");		
             EntityManager em2 = emf2.createEntityManager();
                 
             em2.getTransaction().begin();
@@ -381,7 +380,7 @@ public class SelectRoomController implements Initializable {
         if(roomClass.getValue().toString().contains("All")){
             Room s;
 
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Room.odb");		
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/RoomDB.odb");		
             EntityManager em = emf.createEntityManager();
 
             em.getTransaction().begin();
@@ -398,7 +397,7 @@ public class SelectRoomController implements Initializable {
         else{
             Room s;
 
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Room.odb");		
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/RoomDB.odb");		
             EntityManager em = emf.createEntityManager();
 
             em.getTransaction().begin();
@@ -419,30 +418,30 @@ public class SelectRoomController implements Initializable {
     @FXML
     private void submit(ActionEvent event) throws IOException{
 
-
+        System.out.println("SUBMIT!!!!!!");
         /////get Type room/////
-        EntityManagerFactory emf5 = Persistence.createEntityManagerFactory("$dist/db/Room.odb");		
-	EntityManager em5 = emf5.createEntityManager();
-        
-        em5.getTransaction().begin();
-        
-        Query q11 = em5.createQuery("select roomClass from Room where roomNumber = :RoomNumber",Room.class);
-        String roomClass_s = q11.setParameter("RoomNumber",selected_roomNum).getSingleResult().toString();
-        
-        em5.close();
-        emf5.close();
+//        EntityManagerFactory emf5 = Persistence.createEntityManagerFactory("$dist/db/Database.odb");		
+//	EntityManager em5 = emf5.createEntityManager();
+//        
+//        em5.getTransaction().begin();
+//        
+////        Query q11 = em5.createQuery("select roomClass from Room where roomNumber = :RoomNumber",Room.class);
+////        String roomClass_s = q11.setParameter("RoomNumber",selected_roomNum).getSingleResult().toString();
+//        
+//        em5.close();
+//        emf5.close();
         
         ///////////////////////////////////////////////////
         
         /////// get status room ///////////////////////////
-        EntityManagerFactory emf6 = Persistence.createEntityManagerFactory("$dist/db/Room.odb");		
+        EntityManagerFactory emf6 = Persistence.createEntityManagerFactory("$dist/db/Database.odb");		
 	EntityManager em6 = emf6.createEntityManager();
         
         em6.getTransaction().begin();
         
         Query q12 = em6.createQuery("select stat from Room where roomNumber = :RoomNumber",Room.class);
         String status_s = q12.setParameter("RoomNumber",selected_roomNum).getSingleResult().toString();
-        
+        System.out.println(status_s);
         em6.close();
         emf6.close();
         //////////////////////////////////////////////////
@@ -458,7 +457,61 @@ public class SelectRoomController implements Initializable {
             stage2.showAndWait();  
         }
         else{
-     
+            System.out.println("else");
+            Room s;
+            Pet a;
+            Customer b;
+//            
+//            EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/RoomDB.odb");		
+//            EntityManager em = emf.createEntityManager();
+//            
+            EntityManagerFactory emf2 = Persistence.createEntityManagerFactory("$dist/db/Database.odb");		
+            EntityManager em2 = emf2.createEntityManager();
+//            
+            em2.getTransaction().begin();
+            //em2.getTransaction().begin();
+//            
+            a = em2.find(Pet.class, SelectPetAndDateController.petIDFromSelectPet);
+            System.out.println(a.getName());           
+            s = em2.find(Room.class, selected_roomNum);
+            System.out.println(s.getRoomNumber());
+            //b = em2.find(Customer.class, b)
+//            
+           // s.setStat("Full");
+//            em.persist(s);
+            a.setCheckIn(checkIn_String);
+            a.setCheckOut(checkOut_String);
+            a.setPrice(totalPrice_DB);
+            a.setTotalDay(totalDay);
+//          
+            b = em2.find(Customer.class, ReserveRoomController.primaryKey_tbl);
+            float customerCost = b.getCost();
+            b.setCost(totalPrice_DB + customerCost);
+            em2.persist(b);
+            System.out.println("Cost :"+totalPrice_DB);
+            
+//            b.setTotalDay(SelectPetAndDateController.totalDay);
+//            em2.persist(b);
+//            System.out.println("Total Day: ");
+            
+            s.addPet(a);
+            em2.persist(s);
+            
+            s.setStat("Full");
+            em2.persist(s);
+            
+            a.setIsStay(true);
+            em2.persist(a);
+            
+//            
+//            a.setIsStay(true);
+//            em2.persist(a);
+//            
+            em2.getTransaction().commit();
+            System.out.println("!!!!");
+//            em2.getTransaction().commit();
+            
+            
 //            Object pet_s = ChoosePet.getValue();
 //            int pet_ID = 0;
 //
@@ -528,60 +581,61 @@ public class SelectRoomController implements Initializable {
 //            else{
                 ////// get Customer and Pet name ////
                 //Customer
-                EntityManagerFactory emf8 = Persistence.createEntityManagerFactory("$dist/db/Customer.odb");		
-                EntityManager em8 = emf8.createEntityManager();
-                
-                em8.getMetamodel().entity(Customer.class);
-                Query q20 = em8.createQuery("select name from Customer where primaryKey = :p");
-                String Customer_name = q20.setParameter("p", obj.primaryKey_tbl).getSingleResult().toString();
-                
-                em8.close();
-                emf8.close();
-                
-                //Pet
-                EntityManagerFactory emf9 = Persistence.createEntityManagerFactory("$dist/db/Pet.odb");		
-                EntityManager em9 = emf9.createEntityManager();
-                
-                em9.getMetamodel().entity(Pet.class);
-                Query q21 = em9.createQuery("select name from Pet where pet_ID = :p");
-                String Pet_name = q21.setParameter("p", selectPetObj.petIDFromSelectPet).getSingleResult().toString();
-                
-                em9.close();
-                emf9.close();
-                /////////////////////////////////////
-                
-
-                CustomerRoomPetDB s;
-                EntityManagerFactory emf3 = Persistence.createEntityManagerFactory("$dist/db/CustomerRoomPet.odb");		
-                EntityManager em3 = emf3.createEntityManager();
-
-                em3.getTransaction().begin();
-
-                s = new CustomerRoomPetDB(obj.primaryKey_tbl, selected_roomNum, selectPetObj.petIDFromSelectPet, selectPetObj.checkIn_String, selectPetObj.checkOut_String, selectPetObj.totalDay, totalPrice_DB, Customer_name, Pet_name);
-                em3.persist(s);
-
-                em3.getTransaction().commit();
-
-                Room roomObj;
-                EntityManagerFactory emf4 = Persistence.createEntityManagerFactory("$dist/db/Room.odb");		
-                EntityManager em4 = emf4.createEntityManager();
-
-                em4.getTransaction().begin();
-
-
-
-                Query q10 = em4.createQuery("DELETE FROM Room s WHERE s.roomNumber = :p");
-                q10.setParameter("p", selected_roomNum).executeUpdate();
-
-                System.out.println(roomClass_s);
-
-                roomObj = new Room(selected_roomNum, roomClass_s, "Full");
-                em4.persist(roomObj);
-
-                em4.getTransaction().commit();
-                
-                //// back to dash board ////
-                
+                //////// 10 / 12
+//                EntityManagerFactory emf8 = Persistence.createEntityManagerFactory("$dist/db/Customer.odb");		
+//                EntityManager em8 = emf8.createEntityManager();
+//                
+//                em8.getMetamodel().entity(Customer.class);
+//                Query q20 = em8.createQuery("select name from Customer where primaryKey = :p");
+//                String Customer_name = q20.setParameter("p", obj.primaryKey_tbl).getSingleResult().toString();
+//                
+//                em8.close();
+//                emf8.close();
+//                
+//                //Pet
+//                EntityManagerFactory emf9 = Persistence.createEntityManagerFactory("$dist/db/Pet.odb");		
+//                EntityManager em9 = emf9.createEntityManager();
+//                
+//                em9.getMetamodel().entity(Pet.class);
+//                Query q21 = em9.createQuery("select name from Pet where pet_ID = :p");
+//                String Pet_name = q21.setParameter("p", selectPetObj.petIDFromSelectPet).getSingleResult().toString();
+//                
+//                em9.close();
+//                emf9.close();
+//                /////////////////////////////////////
+//                
+//
+//                CustomerRoomPetDB s;
+//                EntityManagerFactory emf3 = Persistence.createEntityManagerFactory("$dist/db/CustomerRoomPet.odb");		
+//                EntityManager em3 = emf3.createEntityManager();
+//
+//                em3.getTransaction().begin();
+//
+//                s = new CustomerRoomPetDB(obj.primaryKey_tbl, selected_roomNum, selectPetObj.petIDFromSelectPet, selectPetObj.checkIn_String, selectPetObj.checkOut_String, selectPetObj.totalDay, totalPrice_DB, Customer_name, Pet_name);
+//                em3.persist(s);
+//
+//                em3.getTransaction().commit();
+//
+//                Room roomObj;
+//                EntityManagerFactory emf4 = Persistence.createEntityManagerFactory("$dist/db/Room.odb");		
+//                EntityManager em4 = emf4.createEntityManager();
+//
+//                em4.getTransaction().begin();
+//
+//
+//
+//                Query q10 = em4.createQuery("DELETE FROM Room s WHERE s.roomNumber = :p");
+//                q10.setParameter("p", selected_roomNum).executeUpdate();
+//
+//                System.out.println(roomClass_s);
+//
+//                roomObj = new Room(selected_roomNum, roomClass_s, "Full");
+//                em4.persist(roomObj);
+//
+//                em4.getTransaction().commit();
+//                
+//                //// back to dash board ////
+//                
                 Parent reserveLockerParent = FXMLLoader.load(getClass().getResource("StaffDashBoard.fxml"));
                 Scene StaffDashBoard = new Scene(reserveLockerParent);
 
@@ -599,6 +653,7 @@ public class SelectRoomController implements Initializable {
 
                 window.setScene(StaffDashBoard);
                 window.show();
+////// 10 /12
             //} // close if inner if
         } // close if outer if
     }
@@ -624,15 +679,15 @@ public class SelectRoomController implements Initializable {
         //String dummy = ""+obj.primaryKey_tbl;
         //id.setText(dummy);
         
-        roomClass.getItems().addAll("All", "Standard", "Superior", "Suite", "VIP");
+        //roomClass.getItems().addAll("All", "Standard", "Superior", "Suite", "VIP");
               
         roomNumber_tbl.setCellValueFactory(new PropertyValueFactory<>("roomNumber"));
-        roomClass_tbl.setCellValueFactory(new PropertyValueFactory<Room,String>("roomClass"));
+        //roomClass_tbl.setCellValueFactory(new PropertyValueFactory<Room,String>("roomClass"));
         roomStat_tbl.setCellValueFactory(new PropertyValueFactory<Room,String>("stat"));
         
         Room s;
 		
-	EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Room.odb");		
+	EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Database.odb");		
 	EntityManager em = emf.createEntityManager();
                 
         em.getTransaction().begin();
@@ -651,7 +706,7 @@ public class SelectRoomController implements Initializable {
         customerName.setText(obj.customerName_tbl);
         
         	
-	EntityManagerFactory emf2 = Persistence.createEntityManagerFactory("$dist/db/Pet.odb");		
+	EntityManagerFactory emf2 = Persistence.createEntityManagerFactory("$dist/db/Database.odb");		
 	EntityManager em2 = emf2.createEntityManager();
                 
         em2.getTransaction().begin();

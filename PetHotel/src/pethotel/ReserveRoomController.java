@@ -353,12 +353,14 @@ public class ReserveRoomController implements Initializable {
 
             //getUsername when click at table
             primaryKey_tbl = tbl.getSelectionModel().getSelectedItem().getPrimaryKey();
-            System.out.println(primaryKey_tbl);
+            System.out.println("CusKey "+primaryKey_tbl);
             
             customerName_tbl = tbl.getSelectionModel().getSelectedItem().getName();
             System.out.println(primaryKey_tbl);
             
             customerPlan_tbl = tbl.getSelectionModel().getSelectedItem().getPlan();
+            
+            
 
             //popup more customer detail
 //            Stage stage = new Stage();

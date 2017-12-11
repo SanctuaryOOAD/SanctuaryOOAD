@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -17,17 +16,10 @@
       </Label>
       <TableView fx:id="tbl" layoutX="667.0" layoutY="100.0" onMouseClicked="#chooseRoom" prefHeight="564.0" prefWidth="491.0">
         <columns>
-          <TableColumn fx:id="roomNumber_tbl" prefWidth="158.0" text="Room No." />
-          <TableColumn fx:id="roomClass_tbl" prefWidth="172.0" text="Class" />
-            <TableColumn fx:id="roomStat_tbl" prefWidth="160.0" text="Status" />
+          <TableColumn fx:id="roomNumber_tbl" prefWidth="247.0" text="Room No." />
+            <TableColumn fx:id="roomStat_tbl" prefWidth="243.0" text="Status" />
         </columns>
       </TableView>
-      <JFXComboBox fx:id="roomClass" layoutX="190.0" layoutY="178.0" onAction="#selectType" onMouseClicked="#searchRoomClass" prefHeight="26.0" prefWidth="160.0" />
-      <Label layoutX="82.0" layoutY="168.0" prefHeight="47.0" prefWidth="89.0" text="Class :">
-         <font>
-            <Font name="Arial Rounded MT Bold" size="24.0" />
-         </font>
-      </Label>
       <Label layoutX="83.0" layoutY="492.0" text="Total price :">
          <font>
             <Font name="Arial Rounded MT Bold" size="24.0" />

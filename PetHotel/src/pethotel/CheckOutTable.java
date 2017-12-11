@@ -5,6 +5,8 @@
  */
 package pethotel;
 
+import Pet.Pet;
+
 /**
  *
  * @author Corerid
@@ -18,17 +20,21 @@ public class CheckOutTable {
     private String checkOut;
     private float price;
 
-    public CheckOutTable(int roomNumber, String name, String petName, String checkIn, String checkOut, float price) {
+    public CheckOutTable(Pet pet) {
         
-        this.roomNumber = roomNumber;
-        this.name = name;
-        this.petName = petName;
-        this.checkIn = checkIn;
-        this.checkOut = checkOut;
-        this.price = price;
+        this.roomNumber = pet.getRoom().getRoomNumber();
+        this.name = pet.getOwner().getName();
+        this.petName = pet.getName();
+        this.checkIn = pet.getCheckIn();
+        this.checkOut = pet.getCheckOut();
+        this.price = pet.getPrice();
     }
 
+    public int getRoomNumber() {
+        return roomNumber;
+    }
 
+    
     public String getName() {
         return name;
     }

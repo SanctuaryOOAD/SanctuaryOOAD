@@ -5,6 +5,7 @@
  */
 package pethotel;
 
+import Customer.Customer;
 import LinkDB.CustomerPetDB;
 import LinkDB.CustomerRoomPetDB;
 import Pet.Pet;
@@ -72,7 +73,9 @@ public class SelectPetAndDateController implements Initializable {
     //static publi
     int statCP = 0;
     List petList2 = new ArrayList(); //name of customer's pet
-    List petList3 = new ArrayList();
+    List petList3 = new ArrayList(); //pet_id of customer's pet
+    List<String> myList = new ArrayList<String>(); //name of customer's pet
+    
     int len;
     static public int petIDFromSelectPet;
     static public String checkIn_String;
@@ -83,117 +86,128 @@ public class SelectPetAndDateController implements Initializable {
     
     @FXML
     private void choosePet(MouseEvent event){
-        if(statCP == 0){                    //limited set Combbox 
-        statCP = 1;                         //Set Combobox State
+        
+        
+        //if(statCP == 0){                    //limited set Combbox 
+        //statCP = 1;                         //Set Combobox State
         
         //////////////////////Data BASE PET/////////////////////////////////////////////////////////////////        CustomerPet.odb
         //CustomerPetDB s; 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/CustomerPet.odb");		
-	EntityManager em = emf.createEntityManager();
-                
-        em.getTransaction().begin();
+        //        ////////////////// Table //////////////////////////////////
+//        EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Database.odb");		
+//	EntityManager em = emf.createEntityManager();
+//        
+//        em.getTransaction().begin();
+//        
+//        List<Pet> myList = new ArrayList<Pet>();
+//
+//        Query q7 = em.createQuery("SELECT s FROM Customer s WHERE s.primaryKey = :PrimaryKey", Customer.class);
+//        
+//        Customer cus2 = (Customer)q7.setParameter("PrimaryKey", ShowCustomerListController.primaryKeyFromshowmore).getSingleResult();
+//        myList = cus2.getPets();
+//        System.out.println(cus2.getPets());
         
-        Query q4 = em.createQuery("select pet_ID from CustomerPetDB where primaryKey = :PrimaryKey_s",CustomerPetDB.class);
-        List petList = q4.setParameter("PrimaryKey_s",ReserveRoomController.primaryKey_tbl).getResultList();
-        //petList3.add(q4.setParameter("PrimaryKey_s",ReserveRoomController.primaryKey_tbl).getResultList());
-
-        System.out.println(petList);
-        
-        em.getTransaction().commit();
+//        Query q4 = em.createQuery("select  from Pet where primaryKey = :PrimaryKey_s",CustomerPetDB.class);
+//        List petList = q4.setParameter("PrimaryKey_s",ReserveRoomController.primaryKey_tbl).getResultList();
+//
+//        System.out.println(petList);
+//        
+//        em.getTransaction().commit();
         /////////////////////////////////////////////////////////////////////////////////////////////////////
          
         ///////////////////////////////Pet DB////////////////////////////////////////////////////////////////
          
         //create myArray that converted myList (List) to myArray (Array
-        Object[] myArray = petList.toArray(); //array store pet_ID
-
-        for (Object myObject : myArray) {
-           System.out.println(myObject);
-        }
-
-        Pet a;
-	EntityManagerFactory emf2 = Persistence.createEntityManagerFactory("$dist/db/Pet.odb");		
-	EntityManager em2 = emf2.createEntityManager();
-        
-        em2.getTransaction().begin();
-        
-        Query q7 = em2.createQuery("select name from Pet s where s.pet_ID = :p", Pet.class);
-        
-        len = myArray.length;
-        for(int i=0;i<myArray.length;i++){
-            
-             petList2.add(q7.setParameter("p", myArray[i]).getSingleResult());
-             System.out.println(q7.setParameter("p", myArray[i]).getSingleResult());
-             System.out.println("////////////////////////////////////////////////////");
-
-        }
-        
-        ChoosePet.getItems().addAll(petList2);  //Set value Pet
-        }
+//        Object[] myArray = petList.toArray(); //array store pet_ID
+//
+//        for (Object myObject : myArray) {
+//           System.out.println(myObject);
+//        }
+//
+//        Pet a;
+//	EntityManagerFactory emf2 = Persistence.createEntityManagerFactory("$dist/db/Pet.odb");		
+//	EntityManager em2 = emf2.createEntityManager();
+//        
+//        em2.getTransaction().begin();
+//        
+//        Query q7 = em2.createQuery("select name from Pet s where s.pet_ID = :p", Pet.class);
+//        
+//        len = myArray.length;
+//        for(int i=0;i<myArray.length;i++){
+//            
+//             petList2.add(q7.setParameter("p", myArray[i]).getSingleResult());
+//             System.out.println(q7.setParameter("p", myArray[i]).getSingleResult());
+//             System.out.println("////////////////////////////////////////////////////");
+//
+//        }
+//        
+//        ChoosePet.getItems().addAll(petList2);  //Set value Pet
+       // }
     }
     
     public void next(ActionEvent event) throws IOException{
         Object pet_s = ChoosePet.getValue();
         int pet_ID = 0;
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/CustomerPet.odb");		
-        EntityManager em = emf.createEntityManager();
-
-        em.getTransaction().begin();
-
-        Query q4 = em.createQuery("select pet_ID from CustomerPetDB where primaryKey = :PrimaryKey_s",CustomerPetDB.class);
-        List petList = q4.setParameter("PrimaryKey_s",ReserveRoomController.primaryKey_tbl).getResultList();
-
-        em.getTransaction().commit();
+//        EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Database.odb");		
+//        EntityManager em = emf.createEntityManager();
+//
+//        em.getTransaction().begin();
+//
+//        Query q4 = em.createQuery("select pet_ID from Pet where primaryKey = :PrimaryKey_s",CustomerPetDB.class);
+//        List petList = q4.setParameter("PrimaryKey_s",ReserveRoomController.primaryKey_tbl).getResultList();
+//
+//        em.getTransaction().commit();
             ///////////////////////////////Pet DB/////////////////////////////////////////////////////////////////
 
             //create myArray that converted myList (List) to myArray (Array)
-        Object[] myArray = petList.toArray();
+        Object[] myArray = myList.toArray();
 
-        Pet a;
-        EntityManagerFactory emf2 = Persistence.createEntityManagerFactory("$dist/db/Pet.odb");		
-        EntityManager em2 = emf2.createEntityManager();
+//        Pet a;
+//        EntityManagerFactory emf2 = Persistence.createEntityManagerFactory("$dist/db/Pet.odb");		
+//        EntityManager em2 = emf2.createEntityManager();
+//
+//        em2.getTransaction().begin();
+//
+//        Query q7 = em2.createQuery("select name from Pet s where s.pet_ID = :p", Pet.class);
 
-        em2.getTransaction().begin();
-
-        Query q7 = em2.createQuery("select name from Pet s where s.pet_ID = :p", Pet.class);
+//        len = myArray.length;
+//        for(int i=0;i<myArray.length;i++){
+//
+//             petList2.add(q7.setParameter("p", myArray[i]).getSingleResult());
+//
+//        }
+//
+//        for(int i=0;i<len; i++){
+//            if (pet_s == petList2.get(i)){
+//                pet_ID = (int)petList.get(i);
+//            }
+//        }
 
         len = myArray.length;
-        for(int i=0;i<myArray.length;i++){
-
-             petList2.add(q7.setParameter("p", myArray[i]).getSingleResult());
-
-        }
+//        for(int i=0;i<myArray.length;i++){
+//
+//             petList2.add(q7.setParameter("p", myArray[i]).getSingleResult());
+//
+//        }
 
         for(int i=0;i<len; i++){
-            if (pet_s == petList2.get(i)){
-                pet_ID = (int)petList.get(i);
+            if (pet_s == myList.get(i)){
+                pet_ID = (int)petList3.get(i);
             }
         }
 
         System.out.println(pet_ID);
+        
+        ////////check pet isStay //////////////////
+        Pet s;
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Database.odb");		
+        EntityManager em = emf.createEntityManager();
 
-        ////////get pet_id from roomNumber ///////////
-
-
-
-        EntityManagerFactory emf7 = Persistence.createEntityManagerFactory("$dist/db/CustomerRoomPet.odb");		
-        EntityManager em7 = emf7.createEntityManager();
-
-        em7.getTransaction().begin();
-
-        em7.getMetamodel().entity(CustomerRoomPetDB.class);
-
-        Query q13 = em7.createQuery("select pet_ID from CustomerRoomPetDB ");
-        //String roomClass_s = q11.setParameter("RoomNumber",selected_roomNum).getSingleResult().toString();
-        List<CustomerRoomPetDB> pet_IDList = q13.getResultList();
-
-        em7.close();
-        emf7.close();
-
-        /////////////////////////////////////////////
-
-        if(pet_IDList.contains(pet_ID)){
+        em.getTransaction().begin();
+        
+        s = em.find(Pet.class, pet_ID);
+        if(s.isStay() == true){
             System.out.println("This pet's already added!!");
             //popup
             Stage stage2 = new Stage();
@@ -202,7 +216,6 @@ public class SelectPetAndDateController implements Initializable {
             stage2.initModality(Modality.APPLICATION_MODAL);
             stage2.initOwner(checkOut.getScene().getWindow());                
             stage2.showAndWait();
-            
         }
         else{
             petIDFromSelectPet = pet_ID;
@@ -213,9 +226,53 @@ public class SelectPetAndDateController implements Initializable {
             Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         
             window.setScene(LoginCustomer);
-            window.show();
-        
+            window.show();   
         }
+        ///////////////////////////////////////////
+
+        ////////get pet_id from roomNumber ///////////
+
+
+
+//        EntityManagerFactory emf7 = Persistence.createEntityManagerFactory("$dist/db/RoomDB.odb");		
+//        EntityManager em7 = emf7.createEntityManager();
+//
+//        em7.getTransaction().begin();
+//
+//        em7.getMetamodel().entity(CustomerRoomPetDB.class);
+//
+//        Query q13 = em7.createQuery("select pet from CustomerRoomPetDB ");
+        //String roomClass_s = q11.setParameter("RoomNumber",selected_roomNum).getSingleResult().toString();
+//        List<CustomerRoomPetDB> pet_IDList = q13.getResultList();
+//
+//        em7.close();
+//        emf7.close();
+//
+//        /////////////////////////////////////////////
+//
+//        if(pet_IDList.contains(pet_ID)){
+//            System.out.println("This pet's already added!!");
+//            //popup
+//            Stage stage2 = new Stage();
+//            Parent root2 = FXMLLoader.load(getClass().getResource("PopupSamePet.fxml"));
+//            stage2.setScene(new Scene(root2));
+//            stage2.initModality(Modality.APPLICATION_MODAL);
+//            stage2.initOwner(checkOut.getScene().getWindow());                
+//            stage2.showAndWait();
+//            
+//        }
+//        else{
+//            petIDFromSelectPet = pet_ID;
+//            
+//            Parent loginCustomerParent = FXMLLoader.load(getClass().getResource("SelectRoom.fxml"));
+//            Scene LoginCustomer = new Scene(loginCustomerParent);
+//        
+//            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+//        
+//            window.setScene(LoginCustomer);
+//            window.show();
+//        
+//        }
      
     }
     
@@ -236,8 +293,29 @@ public class SelectPetAndDateController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
+        
+        
+        
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Database.odb");		
+	EntityManager em = emf.createEntityManager();
+        
+        em.getTransaction().begin();
+        
+        //List<String> myList = new ArrayList<String>();
+
+        Query q7 = em.createQuery("SELECT s FROM Customer s WHERE s.primaryKey = :PrimaryKey", Customer.class);
+        
+        Customer cus2 = (Customer)q7.setParameter("PrimaryKey", ReserveRoomController.primaryKey_tbl).getSingleResult();
+        myList = cus2.getPetName();
+        System.out.println(cus2.getPetName());
+        
+        ChoosePet.getItems().addAll(myList);
+        
         name.setText(obj.customerName_tbl);
         plan.setText(obj.customerPlan_tbl);
+        
+        petList3 = cus2.getPetID();
+        System.out.println(cus2.getPetID());
         
  ////////////// Format date ////////////////////
         checkIn.setConverter(new StringConverter<LocalDate>() {
