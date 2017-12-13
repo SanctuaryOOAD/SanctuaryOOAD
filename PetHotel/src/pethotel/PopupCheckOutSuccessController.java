@@ -6,7 +6,6 @@
 package pethotel;
 
 import Customer.Customer;
-import LinkDB.CustomerRoomPetDB;
 import Pet.Pet;
 import Room.Room;
 import java.io.IOException;
@@ -14,18 +13,14 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
 import static pethotel.CheckOutController.checkIn_checkout;
 import static pethotel.CheckOutController.checkOut_checkout;
 import static pethotel.CheckOutController.customerName_checkout;
@@ -85,24 +80,10 @@ public class PopupCheckOutSuccessController implements Initializable {
             
             em0.getTransaction().begin();
             em0.getMetamodel().entity(Room.class);
-            
-            
-            //Query q5 = em0.createQuery("SELECT s FROM Room s WHERE s.roomNumber =: roomNumber_checkout", Room.class);
-            //Room room = (Room)q5.setParameter("roomNumber_checkout", roomNumber_checkout).getSingleResult();
+
             Room r;
             r = em0.find(Room.class, roomNumber_checkout);
             
-//            EntityManagerFactory emf1 = Persistence.createEntityManagerFactory("$dist/db/Database.odb");		
-//            EntityManager em1 = emf1.createEntityManager();  
-//            
-//            em1.getTransaction().begin();
-//            em1.getMetamodel().entity(Pet.class);
-            
-//            Pet s;
-//            s = em1.find(Pet.class, 2);
-//            System.out.println(s.getRoom().getRoomNumber());
-//            System.out.println(s.getRoom().getStat());
-//            System.out.println(a.getPet().getPet_ID());
             Pet p = r.getPet();
             Customer c = p.getOwner();
             System.out.println("Old cost: "+c.getCost());
@@ -124,14 +105,10 @@ public class PopupCheckOutSuccessController implements Initializable {
             r.setStat("Available");
             em0.persist(r);
 
-
-
             em0.getTransaction().commit();
             
-            System.out.println("yeah!!!");
+            System.out.println("Check Out Success!");
             
-           
-//            
             Stage stage;
             Parent root;
 

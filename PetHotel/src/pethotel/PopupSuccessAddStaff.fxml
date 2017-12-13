@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="336.0" prefWidth="520.0" style="-fx-background-color: #494545;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pethotel.PopupSuccessAddCustomerController">
+<AnchorPane id="AnchorPane" prefHeight="336.0" prefWidth="520.0" style="-fx-background-color: #494545;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pethotel.PopupSuccessAddStaffController">
    <children>
-      <Label layoutX="116.0" layoutY="38.0" prefHeight="42.0" prefWidth="289.0" text="Successful add customer!!" textFill="WHITE">
+      <Label layoutX="144.0" layoutY="38.0" prefHeight="42.0" prefWidth="233.0" text="Successful add staff!!" textFill="WHITE">
          <font>
             <Font name="Agency FB" size="34.0" />
          </font>

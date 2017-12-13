@@ -18,6 +18,10 @@ public class Dog extends Pet{
     public Dog(int pet_ID, String name, String animal, String extra, int age, Customer owner) {
         super(pet_ID, name, animal, extra, age, owner);
     }
+    
+    public Dog(){
+        
+    }
 
     @Override
     public void how_to() {

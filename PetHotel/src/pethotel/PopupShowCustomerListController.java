@@ -6,7 +6,6 @@
 package pethotel;
 
 import Customer.Customer;
-import LinkDB.CustomerPetDB;
 import Pet.Pet;
 import java.io.IOException;
 import java.net.URL;
@@ -28,7 +27,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
@@ -105,101 +103,26 @@ public class PopupShowCustomerListController implements Initializable {
         idCardNumber.setText(q4.setParameter("PrimaryKey", ShowCustomerListController.primaryKeyFromshowmore).getSingleResult().toString());
         plan.setText(q5.setParameter("PrimaryKey", ShowCustomerListController.primaryKeyFromshowmore).getSingleResult().toString());
         
-//        ////////////////// Table //////////////////////////////////
+        ////////////////// Table //////////////////////////////////
         List<Pet> myList = new ArrayList<Pet>();
-        //Query q6 = em.createQuery("SELECT s FROM Customer s WHERE s.name = \"corerid\"", Customer.class);
+        
         Query q7 = em.createQuery("SELECT s FROM Customer s WHERE s.primaryKey = :PrimaryKey", Customer.class);
         
-            //  Customer cus2 = (Customer)q5.getSingleResult();
-            System.out.println("llllll");
 
-            //Customer cus2 = (Customer)q6.getSingleResult();
-            Customer cus2 = (Customer)q7.setParameter("PrimaryKey", ShowCustomerListController.primaryKeyFromshowmore).getSingleResult();
-            myList = cus2.getPets();
-            System.out.println(cus2.getPets());
+        Customer cus2 = (Customer)q7.setParameter("PrimaryKey", ShowCustomerListController.primaryKeyFromshowmore).getSingleResult();
+        myList = cus2.getPets();
+        System.out.println(cus2.getPets());
             
-                    type.setCellValueFactory(new PropertyValueFactory<Pet, String>("animal"));
+        type.setCellValueFactory(new PropertyValueFactory<Pet, String>("animal"));
         nameT.setCellValueFactory(new PropertyValueFactory<Pet, String>("name"));
         age.setCellValueFactory(new PropertyValueFactory<>("age"));
         extra.setCellValueFactory(new PropertyValueFactory<Pet, String>("extra"));
         
-        //ObservableList<Pet> myList2 = FXCollections.observableArrayList();
         ObservableList<Pet> myList2 = FXCollections.<Pet>observableArrayList(myList);
         table.setItems(myList2);
        
-                for(Pet i: myList){
-            System.out.println("KUYYYYYYYYYY");
+        for(Pet i: myList){
             System.out.println(i);
         }
-        
-
-        
-//        for(Pet i: myList){
-//            System.out.println("KUYYYYYYYYYY");
-//            System.out.println(i);
-//        }
-        
-//        type.setCellValueFactory(new PropertyValueFactory<Pet, String>("animal"));
-//        nameT.setCellValueFactory(new PropertyValueFactory<Pet, String>("name"));
-//        age.setCellValueFactory(new PropertyValueFactory<>("age"));
-//        extra.setCellValueFactory(new PropertyValueFactory<Pet, String>("extra"));
-//        
-//        //ObservableList<Pet> myList2 = FXCollections.observableArrayList();
-//        ObservableList<Pet> myList2 = FXCollections.<Pet>observableArrayList(myList);
-//        table.setItems(myList2);
-//
-//    
-//        CustomerPetDB b;
-//	EntityManagerFactory emf4 = Persistence.createEntityManagerFactory("$dist/db/CustomerPet.odb");		
-//	EntityManager em4 = emf4.createEntityManager();
-//        
-//        em4.getTransaction().begin();
-//        //Search pet_ID that has Primary Key = PrimaryKey -- return List and store in myList
-//        Query q6 = em4.createQuery("SELECT pet_ID FROM CustomerPetDB s WHERE s.primaryKey = :PrimaryKey", CustomerPetDB.class);
-//
-//        List<String> myList = new ArrayList<String>();
-//        
-//        myList = q6.setParameter("PrimaryKey", ShowCustomerListController.primaryKeyFromshowmore).getResultList();
-//        //create myArray that converted myList (List) to myArray (Array
-//        Object[] myArray = myList.toArray();
-//        for (Object myObject : myArray) {
-//           System.out.println(myObject);
-//        }
-//        
-//        
-//        Pet a;
-//	EntityManagerFactory emf2 = Persistence.createEntityManagerFactory("$dist/db/Pet.odb");		
-//	EntityManager em2 = emf2.createEntityManager();
-//        
-//        em2.getTransaction().begin();
-//        
-//        Query q7 = em2.createQuery("select s from Pet s where s.pet_ID = :p", Pet.class);
-//	Query q8 = em2.createQuery("select name from Pet s where s.pet_ID = :p", Pet.class);	
-//        Query q9 = em2.createQuery("select animal from Pet s where s.pet_ID = :p", Pet.class);
-//        Query q10 = em2.createQuery("select age from Pet s where s.pet_ID = :p", Pet.class);
-//        Query q11 = em2.createQuery("select extra from Pet s where s.pet_ID = :p", Pet.class);
-//        
-//        //create ObservableList names obs for create Tableview
-//        ObservableList<CusPet> obs = FXCollections.observableArrayList();
-//      
-//        //This loop for add object (obs) to CusPet(Class for create table) following amount of myArray.length
-//        //วนลูปเพิ่มค่าใน class CusPet เพื่อสร้างตารางโดยเฉพาะ ตามจำนวน pet_ID ที่มี (ตามจำนวนสัตว์ที่ customer มี)
-//        for(int i=0;i<myArray.length;i++){
-//            
-////            System.out.println(q8.setParameter("p", myArray[i]).getSingleResult());
-////            System.out.println(q9.setParameter("p", myArray[i]).getSingleResult());
-////            System.out.println(q10.setParameter("p", myArray[i]).getSingleResult());
-////            System.out.println(q11.setParameter("p", myArray[i]).getSingleResult());
-//            
-//            obs.add(new CusPet(q8.setParameter("p", myArray[i]).getSingleResult().toString(),
-//                               q9.setParameter("p", myArray[i]).getSingleResult().toString(),
-//                               q11.setParameter("p", myArray[i]).getSingleResult().toString(),
-//                               (int)q10.setParameter("p", myArray[i]).getSingleResult()));
-//
-//        }
-//        
-//        table.setItems(obs);
-        
-
     }    
 }

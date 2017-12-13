@@ -16,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -41,40 +42,41 @@ public class StaffDashBoardController implements Initializable {
     @FXML
     private JFXButton logOut;
     
+
     public void changeToManageCustomer(ActionEvent event) throws IOException{
-        
-        Parent loginCustomerParent = FXMLLoader.load(getClass().getResource("ManageCustomer.fxml"));
-        Scene LoginCustomer = new Scene(loginCustomerParent);
-        
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
-        window.setScene(LoginCustomer);
-        window.show();
+
+            Parent loginCustomerParent = FXMLLoader.load(getClass().getResource("ManageCustomer.fxml"));
+            Scene LoginCustomer = new Scene(loginCustomerParent);
+
+            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+            window.setScene(LoginCustomer);
+            window.show();
     }
     
     @FXML
     public void changeToReserveRoom(ActionEvent event) throws IOException{
         
-        Parent reserveRoom = FXMLLoader.load(getClass().getResource("ReserveRoom.fxml"));
-        Scene ReserveRoom = new Scene(reserveRoom);
-        
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
-        window.setScene(ReserveRoom);
-        window.show();  
+            Parent loginCustomerParent = FXMLLoader.load(getClass().getResource("ReserveRoom.fxml"));
+            Scene LoginCustomer = new Scene(loginCustomerParent);
+
+            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+            window.setScene(LoginCustomer);
+            window.show();
 
     }
     
     @FXML
     public void changeToCheckOut(ActionEvent event) throws IOException{
         
-        Parent checkOut = FXMLLoader.load(getClass().getResource("checkOut.fxml"));
-        Scene CheckOut = new Scene(checkOut);
-        
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
-        window.setScene(CheckOut);
-        window.show();
+            Parent loginCustomerParent = FXMLLoader.load(getClass().getResource("checkOut.fxml"));
+            Scene LoginCustomer = new Scene(loginCustomerParent);
+
+            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+            window.setScene(LoginCustomer);
+            window.show();
     }
     
     @FXML
@@ -88,6 +90,66 @@ public class StaffDashBoardController implements Initializable {
         window.setScene(LoginCustomer);
         window.show();
     }
+    
+    public void changeToAddStaff(ActionEvent event) throws IOException{
+        if(!StaffLoginController.isAdmin){
+            Stage stage2 = new Stage();
+            Parent root2 = FXMLLoader.load(getClass().getResource("PopupNotAdmin.fxml"));
+            stage2.setScene(new Scene(root2));
+            stage2.initModality(Modality.APPLICATION_MODAL);
+            stage2.initOwner(checkOut.getScene().getWindow());                
+            stage2.showAndWait(); 
+        }
+        else{
+            Parent loginCustomerParent = FXMLLoader.load(getClass().getResource("AddStaff.fxml"));
+            Scene LoginCustomer = new Scene(loginCustomerParent);
+
+            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+            window.setScene(LoginCustomer);
+            window.show();
+        }
+    }
+    
+    public void changeToDeleteStaff(ActionEvent event) throws IOException{
+        if(!StaffLoginController.isAdmin){
+            Stage stage2 = new Stage();
+            Parent root2 = FXMLLoader.load(getClass().getResource("PopupNotAdmin.fxml"));
+            stage2.setScene(new Scene(root2));
+            stage2.initModality(Modality.APPLICATION_MODAL);
+            stage2.initOwner(checkOut.getScene().getWindow());                
+            stage2.showAndWait(); 
+        }
+        else{
+            Parent loginCustomerParent = FXMLLoader.load(getClass().getResource("DeleteStaff.fxml"));
+            Scene LoginCustomer = new Scene(loginCustomerParent);
+
+            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+            window.setScene(LoginCustomer);
+            window.show();
+        }
+    }
+    
+    public void changeToShowStaff(ActionEvent event) throws IOException{
+        if(!StaffLoginController.isAdmin){
+            Stage stage2 = new Stage();
+            Parent root2 = FXMLLoader.load(getClass().getResource("PopupNotAdmin.fxml"));
+            stage2.setScene(new Scene(root2));
+            stage2.initModality(Modality.APPLICATION_MODAL);
+            stage2.initOwner(checkOut.getScene().getWindow());                
+            stage2.showAndWait(); 
+        }
+        else{
+            Parent loginCustomerParent = FXMLLoader.load(getClass().getResource("ShowStaffList.fxml"));
+            Scene LoginCustomer = new Scene(loginCustomerParent);
+
+            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+            window.setScene(LoginCustomer);
+            window.show();
+        }
+    }    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {

@@ -9,9 +9,6 @@ import Customer.Customer;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
-import static java.nio.file.Files.list;
-import static java.rmi.Naming.list;
-import static java.util.Collections.list;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
@@ -31,14 +28,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
-import static pethotel.AddPetController.customerNameFromAddPet;
-import static pethotel.AddPetController.primaryKeyFromAddPet;
 
 /**
  * FXML Controller class
@@ -109,6 +103,54 @@ public class ReserveRoomController implements Initializable {
     static public int primaryKey_tbl;
     static public String customerName_tbl;
     static public String customerPlan_tbl;
+
+    public void changeToManageCustomer(ActionEvent event) throws IOException{
+        
+        Parent loginCustomerParent = FXMLLoader.load(getClass().getResource("ManageCustomer.fxml"));
+        Scene LoginCustomer = new Scene(loginCustomerParent);
+        
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        
+        window.setScene(LoginCustomer);
+        window.show();
+    }
+    
+    @FXML
+    public void changeToReserveRoom(ActionEvent event) throws IOException{
+        
+        Parent reserveRoom = FXMLLoader.load(getClass().getResource("ReserveRoom.fxml"));
+        Scene ReserveRoom = new Scene(reserveRoom);
+        
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        
+        window.setScene(ReserveRoom);
+        window.show();  
+
+    }
+    
+    @FXML
+    public void changeToCheckOut(ActionEvent event) throws IOException{
+        
+        Parent checkOut = FXMLLoader.load(getClass().getResource("checkOut.fxml"));
+        Scene CheckOut = new Scene(checkOut);
+        
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        
+        window.setScene(CheckOut);
+        window.show();
+    }
+    
+    @FXML
+    public void logOut(ActionEvent event) throws IOException{
+        
+        Parent loginCustomerParent = FXMLLoader.load(getClass().getResource("Welcome.fxml"));
+        Scene LoginCustomer = new Scene(loginCustomerParent);
+        
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        
+        window.setScene(LoginCustomer);
+        window.show();
+    }    
     
 
     @FXML
@@ -122,45 +164,6 @@ public class ReserveRoomController implements Initializable {
         window.show();
 
     }      //BACK BUTTON
-    
-//    @FXML
-//    private void searchName(KeyEvent event){
-//        Customer s;
-//		
-//	EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Customer.odb");		
-//	EntityManager em = emf.createEntityManager();
-//                
-//        em.getTransaction().begin();
-//                //select s from Student s order by s.aggregate asc
-//        Query q1 = em.createQuery("SELECT s FROM Customer s order by s.primaryKey asc");
-//        Query q2 = em.createQuery("select Type from Customer");
-//        
-//
-//        
-//        List<Customer> results = q1.getResultList();
-//        ObservableList<Customer> results2 = FXCollections.<Customer>observableArrayList(results);
-//        
-//        FilteredList filter = new FilteredList(results2, e->true);
-//          System.out.println(""+name.textProperty());
-//        name.textProperty().addListener((observable, oldValue, newValue)->{
-//            filter.setPredicate((Predicate<? super Customer>)(Customer std)->{
-//
-//                if(newValue.isEmpty() || newValue == null){
-//                    return true;
-//                }
-//                else if(std.getName().contains(newValue)){
-//                    return true;
-//                }
-//
-//                return false;
-//            });
-//        });
-//        
-//        SortedList sort = new SortedList(filter);
-//        sort.comparatorProperty().bind(tbl.comparatorProperty());
-//        tbl.setItems(filter);
-//
-//    }
 
     @FXML
     private void search(KeyEvent event){
@@ -174,7 +177,6 @@ public class ReserveRoomController implements Initializable {
         em.getMetamodel().entity(Customer.class); // Query empty database
                 
         Query q1 = em.createQuery("SELECT s FROM Customer s");
-        Query q2 = em.createQuery("select Type from Customer");
         
         List<Customer> results = q1.getResultList();
         ObservableList<Customer> results2 = FXCollections.<Customer>observableArrayList(results);
@@ -211,7 +213,6 @@ public class ReserveRoomController implements Initializable {
         em.getTransaction().begin();
                 
         Query q1 = em.createQuery("SELECT s FROM Customer s");
-        Query q2 = em.createQuery("select Type from Customer");
         
         List<Customer> results = q1.getResultList();
         ObservableList<Customer> results2 = FXCollections.<Customer>observableArrayList(results);
@@ -247,7 +248,6 @@ public class ReserveRoomController implements Initializable {
         em.getTransaction().begin();
                 
         Query q1 = em.createQuery("SELECT s FROM Customer s");
-        Query q2 = em.createQuery("select Type from Customer");
         
         List<Customer> results = q1.getResultList();
         ObservableList<Customer> results2 = FXCollections.<Customer>observableArrayList(results);
@@ -283,7 +283,6 @@ public class ReserveRoomController implements Initializable {
         em.getTransaction().begin();
                 
         Query q1 = em.createQuery("SELECT s FROM Customer s");
-        Query q2 = em.createQuery("select Type from Customer");
         
         List<Customer> results = q1.getResultList();
         ObservableList<Customer> results2 = FXCollections.<Customer>observableArrayList(results);
@@ -319,8 +318,7 @@ public class ReserveRoomController implements Initializable {
         em.getTransaction().begin();
                 
         Query q1 = em.createQuery("SELECT s FROM Customer s");
-        Query q2 = em.createQuery("select Type from Customer");
-        
+
         List<Customer> results = q1.getResultList();
         ObservableList<Customer> results2 = FXCollections.<Customer>observableArrayList(results);
         
@@ -353,39 +351,24 @@ public class ReserveRoomController implements Initializable {
 
             //getUsername when click at table
             primaryKey_tbl = tbl.getSelectionModel().getSelectedItem().getPrimaryKey();
-            System.out.println("CusKey "+primaryKey_tbl);
+            System.out.println("Customwe Key "+primaryKey_tbl);
             
             customerName_tbl = tbl.getSelectionModel().getSelectedItem().getName();
             System.out.println(primaryKey_tbl);
             
             customerPlan_tbl = tbl.getSelectionModel().getSelectedItem().getPlan();
             
-            
 
-            //popup more customer detail
-//            Stage stage = new Stage();
-//            Parent root = FXMLLoader.load(getClass().getResource("SelectRoom.fxml"));
-//            stage.setScene(new Scene(root));
-//            stage.initModality(Modality.APPLICATION_MODAL);
-//            stage.initOwner(tbl.getScene().getWindow());
-//            stage.showAndWait();
+            Parent loginCustomerParent = FXMLLoader.load(getClass().getResource("SelectPetAndDate.fxml"));
+            Scene LoginCustomer = new Scene(loginCustomerParent);
 
-        Parent loginCustomerParent = FXMLLoader.load(getClass().getResource("SelectPetAndDate.fxml"));
-        Scene LoginCustomer = new Scene(loginCustomerParent);
-        
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
-        window.setScene(LoginCustomer);
-        window.show();
-        
-           
-        
+            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+            window.setScene(LoginCustomer);
+            window.show();
 
         }
     }
-    
-
-    
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -405,20 +388,12 @@ public class ReserveRoomController implements Initializable {
         em.getTransaction().begin();
                 
         Query q1 = em.createQuery("SELECT s FROM Customer s order by s.primaryKey asc");
-        Query q2 = em.createQuery("select Type from Customer");
         
         List<Customer> results = q1.getResultList();
         ObservableList<Customer> results2 = FXCollections.<Customer>observableArrayList(results);
         tbl.setItems(results2);
         
-         //FilteredList filter = new FilteredList(results2, e->true);
-        //haha.Items(results2);
-        /*System.out.println(results);
-        for (Object p : results2) {
-                        System.out.println("SADDD");
-			System.out.println(p);
-	}*/
-         TableView<Customer> table = new TableView<>();
+        TableView<Customer> table = new TableView<>();
         
     }    
     

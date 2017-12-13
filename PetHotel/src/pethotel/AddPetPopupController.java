@@ -5,15 +5,9 @@
  */
 package pethotel;
 
-import Customer.Customer;
-import Customer.Customer_Gold;
-import Customer.Customer_Platinum;
-import Customer.Customer_Silver;
-import LinkDB.CustomerPetDB;
-import Pet.Cat;
+
 import Pet.Dog;
 import Pet.Pet;
-import Pet.Rabbit;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
@@ -26,10 +20,6 @@ import javafx.scene.Parent;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
 import static pethotel.AddPetController.primaryKeyFromAddPet;
 
 /**
@@ -51,6 +41,7 @@ public class AddPetPopupController implements Initializable {
     @FXML
     private JFXTextField petName;
 
+    
     @FXML
     private JFXTextField petAge;
 
@@ -70,60 +61,23 @@ public class AddPetPopupController implements Initializable {
         String extra_s = extra.getText();
         String type_s = type.getValue().toString();
         
-        Customer s;
-		
-	EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Customer.odb");		
-	EntityManager em = emf.createEntityManager();
-                
-        em.getTransaction().begin();
-                
-        Query q3 = em.createQuery("select max(pet_ID) from Pet");
-        Query q6 = em.createQuery("SELECT s FROM Pet s"); 
-        
-	//List<Customer> results = q2.getResultList();
-        
-        em.close();
-        emf.close(); //close connection before add data
         
         AddPetController obj;
         obj = new AddPetController();
         
         Pet b ;
         
-        int dummyPrime = 1;
             
-//        switch(type_s){
-//                
-//            case "Cat" : b = new Cat(dummyPrime, obj.customerNameFromAddPet, name_s, type_s, extra_s, age_s);    break;
-//            case "Dog" : b = new Dog(dummyPrime, obj.customerNameFromAddPet, name_s, type_s, extra_s, age_s);    break;
-//            case "Rabbit" : b = new Rabbit(dummyPrime, obj.customerNameFromAddPet, name_s, type_s, extra_s, age_s);  break;
-//            default :   b = new Pet(dummyPrime ,obj.customerNameFromAddPet, name_s, type_s, extra_s, age_s);
-//                
-//        }
-        b = new Pet();
+        b = new Dog();
         b.addPet(primaryKeyFromAddPet,name_s, type_s, extra_s, age_s);
          
-        System.out.println("Yeah!");
+        System.out.println("Add Success!");
             
         Stage stage;
         Parent root;
         
         stage = (Stage)back.getScene().getWindow();
         stage.close();
-            
-        /////////////// CustomerPetDB Part ////////////////////////////////////
-//        CustomerPetDB obj2;
-//        
-//	EntityManagerFactory emf2 = Persistence.createEntityManagerFactory("$dist/db/CustomerPet.odb");		
-//	EntityManager em2 = emf2.createEntityManager();
-//        
-//        em2.getTransaction().begin();
-//        
-//        obj2 = new CustomerPetDB(obj.primaryKeyFromAddPet,);
-//	em.persist(obj2);
-//
-//	em.getTransaction().commit();
-        ///////////////////////////////////////////////////////////////////////
         
     }
     

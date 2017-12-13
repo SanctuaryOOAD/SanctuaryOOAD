@@ -5,7 +5,6 @@
  */
 package Customer;
 
-import LinkDB.CustomerPetDB;
 import Pet.Pet;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +16,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Persistence;
@@ -28,7 +28,7 @@ import static pethotel.AddCustomerController.planFromAddCustomerController;
  * @author natht
  */
 @Entity
-public class Customer {
+public abstract class Customer {
        
         @Id
         private int primaryKey;        //Primary Key
@@ -38,10 +38,10 @@ public class Customer {
         private String idcardNumber;
         private String plan;
         
+        private int stayed = 0;
         protected float cost = 0;   //cost
-        //private int totalDay = 0;
         
-        @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+        @OneToMany(cascade = CascadeType.ALL)
         private List<Pet> pets;
 
     public Customer(int primaryKey, String name, String tel, String email, String idcardNumber, String plan) {
@@ -99,9 +99,6 @@ public class Customer {
         for(Pet i:pets){
             petName.add(i.getName());
             
-//            if(i == null){
-//                break;
-//            }
         }
       return petName; 
    }
@@ -112,9 +109,6 @@ public class Customer {
         for(Pet i:pets){
             petID.add(i.getPet_ID());
             
-//            if(i == null){
-//                break;
-//            }
         }
       return petID; 
    }
@@ -122,10 +116,14 @@ public class Customer {
     public float getCost() {
         return cost;
     }
-   
-   
 
+    public int getStayed() {
+        return stayed;
+    }
 
+    public void setStayed(int stayed) {
+        this.stayed = stayed;
+    }
     
     
         public void setCost(float cost) {
@@ -140,23 +138,6 @@ public class Customer {
             return this.cost - discount(); 
         }  // Calculate realcost(cost - discount)
         
-        public void AddPetCustomer(int pet_ID){
-           
-        CustomerPetDB obj; //Customer object
-	EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/CustomerPet.odb");		
-	EntityManager em = emf.createEntityManager();
-        
-        em.getTransaction().begin();
-        
-        obj = new CustomerPetDB(this.primaryKey,pet_ID);   //Add username + Pet ID
-	em.persist(obj);
-
-
-	em.getTransaction().commit();
-        
-        
-        
-        }
         
         public void addCustomer(String name, String tel, String email, String idcardNumber, String plan){
             Customer s;
@@ -174,15 +155,12 @@ public class Customer {
      
             if( q3.getSingleResult() == null){
                 
-//                s = new Customer(1, name, tel, email, idcardNumber, plan);
-//                em.persist(s);
-                
-                switch(planFromAddCustomerController){
+            switch(planFromAddCustomerController){
                 
                 case "Silver" : s = new Customer_Silver(1, name, tel, email, idcardNumber, plan);    break;
                 case "Gold" : s = new Customer_Gold(1, name, tel, email, idcardNumber, plan);    break;
                 case "Platinum" : s = new Customer_Platinum(1, name, tel, email, idcardNumber, plan);  break;
-                default :   s = new Customer(1, name, tel, email, idcardNumber, plan);
+                default :   s = new Customer_Silver(1, name, tel, email, idcardNumber, plan);
                 
                 }
                 em.persist(s);
@@ -190,16 +168,13 @@ public class Customer {
             else{
                 int maxPrimaryKey = (int)q3.getSingleResult();
                    System.out.println(maxPrimaryKey);
-
-//                s = new Customer(maxPrimaryKey+1, name, tel, email, idcardNumber, plan);
-//                em.persist(s);
                 
                 switch(planFromAddCustomerController){
                 
                 case "Silver" : s = new Customer_Silver(maxPrimaryKey+1, name, tel, email, idcardNumber, plan);    break;
                 case "Gold" : s = new Customer_Gold(maxPrimaryKey+1, name, tel, email, idcardNumber, plan);    break;
                 case "Platinum" : s = new Customer_Platinum(maxPrimaryKey+1, name, tel, email, idcardNumber, plan);  break;
-                default :   s = new Customer(maxPrimaryKey+1, name, tel, email, idcardNumber, plan);
+                default :   s = new Customer_Silver(maxPrimaryKey+1, name, tel, email, idcardNumber, plan);
                 
                 }
                 em.persist(s);

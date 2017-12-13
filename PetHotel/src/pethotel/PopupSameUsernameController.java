@@ -20,7 +20,7 @@ import javafx.stage.Stage;
  *
  * @author Corerid
  */
-public class PopupSuccessAddCustomerController implements Initializable {
+public class PopupSameUsernameController implements Initializable {
 
     /**
      * Initializes the controller class.
@@ -36,7 +36,7 @@ public class PopupSuccessAddCustomerController implements Initializable {
         stage = (Stage)ok.getScene().getWindow();
         stage.close();
         
-    }
+    }     
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {

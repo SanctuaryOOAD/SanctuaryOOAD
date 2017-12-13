@@ -9,9 +9,6 @@ import Customer.Customer;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
-import static java.nio.file.Files.list;
-import static java.rmi.Naming.list;
-import static java.util.Collections.list;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
@@ -90,6 +87,56 @@ public class ShowCustomerListController implements Initializable {
 
     @FXML
     private TableColumn<Customer, String> idCardNumber;
+    
+    @FXML
+    private TableColumn<Customer, String> stayed;
+
+     @FXML
+    public void changeToAddCustomer(ActionEvent event) throws IOException{
+        
+        Parent reserveLockerParent = FXMLLoader.load(getClass().getResource("AddCustomer.fxml"));
+        Scene ReserveLocker = new Scene(reserveLockerParent);
+        
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        
+        window.setScene(ReserveLocker);
+        window.show();
+    }
+    
+    @FXML
+    public void changeToAddPet(ActionEvent event) throws IOException{
+        
+        Parent reserveLockerParent = FXMLLoader.load(getClass().getResource("AddPet.fxml"));
+        Scene ReserveLocker = new Scene(reserveLockerParent);
+        
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        
+        window.setScene(ReserveLocker);
+        window.show();
+    }
+    
+    @FXML
+    public void back(ActionEvent event) throws IOException{
+        
+        Parent reserveLockerParent = FXMLLoader.load(getClass().getResource("StaffDashBoard.fxml"));
+        Scene ReserveLocker = new Scene(reserveLockerParent);
+        
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        
+        window.setScene(ReserveLocker);
+        window.show();
+    }
+    
+    public void changToShowCustomerList(ActionEvent event) throws IOException{
+        
+        Parent reserveLockerParent = FXMLLoader.load(getClass().getResource("ShowCustomerList.fxml"));
+        Scene ReserveLocker = new Scene(reserveLockerParent);
+        
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        
+        window.setScene(ReserveLocker);
+        window.show();
+    } 
  
     
     @FXML
@@ -104,7 +151,6 @@ public class ShowCustomerListController implements Initializable {
         em.getMetamodel().entity(Customer.class); // Query empty database
                 
         Query q1 = em.createQuery("SELECT s FROM Customer s");
-        Query q2 = em.createQuery("select Type from Customer");
         
         List<Customer> results = q1.getResultList();
         ObservableList<Customer> results2 = FXCollections.<Customer>observableArrayList(results);
@@ -141,7 +187,6 @@ public class ShowCustomerListController implements Initializable {
         em.getTransaction().begin();
         em.getMetamodel().entity(Customer.class);        
         Query q1 = em.createQuery("SELECT s FROM Customer s");
-        Query q2 = em.createQuery("select Type from Customer");
         
         List<Customer> results = q1.getResultList();
         ObservableList<Customer> results2 = FXCollections.<Customer>observableArrayList(results);
@@ -177,7 +222,6 @@ public class ShowCustomerListController implements Initializable {
         em.getTransaction().begin();
         em.getMetamodel().entity(Customer.class);        
         Query q1 = em.createQuery("SELECT s FROM Customer s");
-        Query q2 = em.createQuery("select Type from Customer");
         
         List<Customer> results = q1.getResultList();
         ObservableList<Customer> results2 = FXCollections.<Customer>observableArrayList(results);
@@ -213,7 +257,6 @@ public class ShowCustomerListController implements Initializable {
         em.getTransaction().begin();
         em.getMetamodel().entity(Customer.class);        
         Query q1 = em.createQuery("SELECT s FROM Customer s");
-        Query q2 = em.createQuery("select Type from Customer");
         
         List<Customer> results = q1.getResultList();
         ObservableList<Customer> results2 = FXCollections.<Customer>observableArrayList(results);
@@ -249,7 +292,6 @@ public class ShowCustomerListController implements Initializable {
         em.getTransaction().begin();
         em.getMetamodel().entity(Customer.class);        
         Query q1 = em.createQuery("SELECT s FROM Customer s");
-        Query q2 = em.createQuery("select Type from Customer");
         
         List<Customer> results = q1.getResultList();
         ObservableList<Customer> results2 = FXCollections.<Customer>observableArrayList(results);
@@ -305,21 +347,6 @@ public class ShowCustomerListController implements Initializable {
         
     }
     
-    public void back(ActionEvent event) throws IOException{
-        Parent loginCustomerParent = FXMLLoader.load(getClass().getResource("ManageCustomer.fxml"));
-        Scene LoginCustomer = new Scene(loginCustomerParent);
-        
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
-        window.setScene(LoginCustomer);
-        window.show();
-        
-    }
-
-        
-    
- //FilteredList filter = new FilteredList(, e->true);
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         id.setCellValueFactory(new PropertyValueFactory<>("primaryKey"));
@@ -328,10 +355,8 @@ public class ShowCustomerListController implements Initializable {
         tel.setCellValueFactory(new PropertyValueFactory<Customer, String>("tel"));
         email.setCellValueFactory(new PropertyValueFactory<Customer, String>("email"));
         idCardNumber.setCellValueFactory(new PropertyValueFactory<Customer, String>("idcardNumber"));
-        
-        //Customer s;
-        
-        
+        stayed.setCellValueFactory(new PropertyValueFactory<>("stayed"));
+          
         Customer s;
 		
 	EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Database.odb");		
@@ -342,20 +367,17 @@ public class ShowCustomerListController implements Initializable {
         em.getMetamodel().entity(Customer.class); // Query empty database
                 
         Query q1 = em.createQuery("SELECT s FROM Customer s");
-        Query q2 = em.createQuery("select Type from Customer");
         
         List<Customer> results = q1.getResultList();
         ObservableList<Customer> results2 = FXCollections.<Customer>observableArrayList(results);
         table.setItems(results2);
-        
-         //FilteredList filter = new FilteredList(results2, e->true);
-        //haha.Items(results2);
+
         System.out.println(results);
         for (Object p : results2) {
                         System.out.println("SADDD");
 			System.out.println(p);
 	}
-         TableView<Customer> table = new TableView<>();
+        TableView<Customer> table = new TableView<>();
     }    
     
 }

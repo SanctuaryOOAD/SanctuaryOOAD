@@ -7,16 +7,16 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="336.0" prefWidth="520.0" style="-fx-background-color: #6893DD;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pethotel.PopupFullRoomController">
+<AnchorPane id="AnchorPane" prefHeight="336.0" prefWidth="520.0" style="-fx-background-color: #494545;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pethotel.PopupFullRoomController">
    <children>
-      <Label layoutX="149.0" layoutY="40.0" prefHeight="42.0" prefWidth="223.0" text="Room Not Available!!" textFill="#6f0b0b">
+      <Label layoutX="149.0" layoutY="40.0" prefHeight="42.0" prefWidth="223.0" text="Room Not Available!!" textFill="WHITE">
          <font>
             <Font name="Agency FB" size="34.0" />
          </font>
       </Label>
-      <Button fx:id="ok" layoutX="197.0" layoutY="252.0" mnemonicParsing="false" onAction="#back" prefHeight="57.0" prefWidth="127.0" style="-fx-background-color: #3871C8;" text="OK" textFill="WHITE">
+      <Button fx:id="ok" layoutX="197.0" layoutY="252.0" mnemonicParsing="false" onAction="#back" prefHeight="57.0" prefWidth="127.0" style="-fx-background-color: #323232;" text="OK" textFill="WHITE">
          <font>
-            <Font name="Impact" size="30.0" />
+            <Font name="Agency FB" size="30.0" />
          </font>
       </Button>
       <ImageView fitHeight="136.0" fitWidth="141.0" layoutX="197.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">

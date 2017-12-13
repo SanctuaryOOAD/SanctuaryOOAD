@@ -88,10 +88,57 @@ public class AddPetController implements Initializable {
 
     @FXML
     private TableColumn<Customer, String> idCardNumber;
+    
+     @FXML
+    public void changeToAddCustomer(ActionEvent event) throws IOException{
+        
+        Parent reserveLockerParent = FXMLLoader.load(getClass().getResource("AddCustomer.fxml"));
+        Scene ReserveLocker = new Scene(reserveLockerParent);
+        
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        
+        window.setScene(ReserveLocker);
+        window.show();
+    }
+    
+    @FXML
+    public void changeToAddPet(ActionEvent event) throws IOException{
+        
+        Parent reserveLockerParent = FXMLLoader.load(getClass().getResource("AddPet.fxml"));
+        Scene ReserveLocker = new Scene(reserveLockerParent);
+        
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        
+        window.setScene(ReserveLocker);
+        window.show();
+    }
+    
+    @FXML
+    public void back(ActionEvent event) throws IOException{
+        
+        Parent reserveLockerParent = FXMLLoader.load(getClass().getResource("StaffDashBoard.fxml"));
+        Scene ReserveLocker = new Scene(reserveLockerParent);
+        
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        
+        window.setScene(ReserveLocker);
+        window.show();
+    }
+    
+    @FXML
+    public void changToShowCustomerList(ActionEvent event) throws IOException{
+        
+        Parent reserveLockerParent = FXMLLoader.load(getClass().getResource("ShowCustomerList.fxml"));
+        Scene ReserveLocker = new Scene(reserveLockerParent);
+        
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        
+        window.setScene(ReserveLocker);
+        window.show();
+    }     
  
     @FXML
     private void searchAll(KeyEvent event){
-        Customer s;
 		
 	EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Customer.odb");		
 	EntityManager em = emf.createEntityManager();
@@ -99,8 +146,7 @@ public class AddPetController implements Initializable {
         em.getTransaction().begin();
                 
         Query q1 = em.createQuery("SELECT s FROM Customer s");
-        Query q2 = em.createQuery("select Type from Customer");
-        
+      
         List<Customer> results = q1.getResultList();
         ObservableList<Customer> results2 = FXCollections.<Customer>observableArrayList(results);
         
@@ -127,7 +173,6 @@ public class AddPetController implements Initializable {
     
     @FXML
     private void search(KeyEvent event){
-        Customer s;
 		
 	EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Customer.odb");		
 	EntityManager em = emf.createEntityManager();
@@ -166,15 +211,12 @@ public class AddPetController implements Initializable {
     @FXML
     private void searchPlan(KeyEvent event){
 
-        Customer s;
-		
 	EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Database.odb");		
 	EntityManager em = emf.createEntityManager();
                 
         em.getTransaction().begin();
                 
         Query q1 = em.createQuery("SELECT s FROM Customer s");
-        Query q2 = em.createQuery("select Type from Customer");
         
         List<Customer> results = q1.getResultList();
         ObservableList<Customer> results2 = FXCollections.<Customer>observableArrayList(results);
@@ -202,7 +244,6 @@ public class AddPetController implements Initializable {
     
     @FXML
     private void searchTel(KeyEvent event){
-        Customer s;
 		
 	EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Database.odb");		
 	EntityManager em = emf.createEntityManager();
@@ -210,7 +251,6 @@ public class AddPetController implements Initializable {
         em.getTransaction().begin();
                 
         Query q1 = em.createQuery("SELECT s FROM Customer s");
-        Query q2 = em.createQuery("select Type from Customer");
         
         List<Customer> results = q1.getResultList();
         ObservableList<Customer> results2 = FXCollections.<Customer>observableArrayList(results);
@@ -238,7 +278,6 @@ public class AddPetController implements Initializable {
     
     @FXML
     private void searchEmail(KeyEvent event){
-        Customer s;
 		
 	EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Database.odb");		
 	EntityManager em = emf.createEntityManager();
@@ -246,7 +285,6 @@ public class AddPetController implements Initializable {
         em.getTransaction().begin();
                 
         Query q1 = em.createQuery("SELECT s FROM Customer s");
-        Query q2 = em.createQuery("select Type from Customer");
         
         List<Customer> results = q1.getResultList();
         ObservableList<Customer> results2 = FXCollections.<Customer>observableArrayList(results);
@@ -274,7 +312,6 @@ public class AddPetController implements Initializable {
     
     @FXML
     private void searchIdCard(KeyEvent event){
-        Customer s;
 		
 	EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Database.odb");		
 	EntityManager em = emf.createEntityManager();
@@ -282,7 +319,6 @@ public class AddPetController implements Initializable {
         em.getTransaction().begin();
                 
         Query q1 = em.createQuery("SELECT s FROM Customer s");
-        Query q2 = em.createQuery("select Type from Customer");
         
         List<Customer> results = q1.getResultList();
         ObservableList<Customer> results2 = FXCollections.<Customer>observableArrayList(results);
@@ -338,20 +374,6 @@ public class AddPetController implements Initializable {
         
     }
     
-    public void back(ActionEvent event) throws IOException{
-        Parent loginCustomerParent = FXMLLoader.load(getClass().getResource("ManageCustomer.fxml"));
-        Scene LoginCustomer = new Scene(loginCustomerParent);
-        
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
-        window.setScene(LoginCustomer);
-        window.show();
-        
-    }
-
-        
-    
- //FilteredList filter = new FilteredList(, e->true);
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -361,26 +383,18 @@ public class AddPetController implements Initializable {
         tel.setCellValueFactory(new PropertyValueFactory<Customer, String>("tel"));
         email.setCellValueFactory(new PropertyValueFactory<Customer, String>("email"));
         idCardNumber.setCellValueFactory(new PropertyValueFactory<Customer, String>("idcardNumber"));
-        
-        //Customer s;
-        
-        
-        Customer s;
-		
+  
 	EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Database.odb");		
 	EntityManager em = emf.createEntityManager();
                 
         em.getTransaction().begin();
                 
         Query q1 = em.createQuery("SELECT s FROM Customer s");
-        Query q2 = em.createQuery("select Type from Customer");
         
         List<Customer> results = q1.getResultList();
         ObservableList<Customer> results2 = FXCollections.<Customer>observableArrayList(results);
         table.setItems(results2);
         
-         //FilteredList filter = new FilteredList(results2, e->true);
-        //haha.Items(results2);
         System.out.println(results);
         for (Object p : results2) {
                         System.out.println("SADDD");

@@ -65,6 +65,55 @@ public class AddCustomerController implements Initializable {
     
     static public String planFromAddCustomerController;
     
+    
+    @FXML
+    public void changToShowCustomerList(ActionEvent event) throws IOException{
+        
+        Parent reserveLockerParent = FXMLLoader.load(getClass().getResource("ShowCustomerList.fxml"));
+        Scene ReserveLocker = new Scene(reserveLockerParent);
+        
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        
+        window.setScene(ReserveLocker);
+        window.show();
+    }     
+    
+    @FXML
+    public void changeToAddCustomer(ActionEvent event) throws IOException{
+        
+        Parent reserveLockerParent = FXMLLoader.load(getClass().getResource("AddCustomer.fxml"));
+        Scene ReserveLocker = new Scene(reserveLockerParent);
+        
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        
+        window.setScene(ReserveLocker);
+        window.show();
+    }
+    
+    @FXML
+    public void changeToAddPet(ActionEvent event) throws IOException{
+        
+        Parent reserveLockerParent = FXMLLoader.load(getClass().getResource("AddPet.fxml"));
+        Scene ReserveLocker = new Scene(reserveLockerParent);
+        
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        
+        window.setScene(ReserveLocker);
+        window.show();
+    }
+    
+    @FXML
+    public void back(ActionEvent event) throws IOException{
+        
+        Parent reserveLockerParent = FXMLLoader.load(getClass().getResource("StaffDashBoard.fxml"));
+        Scene ReserveLocker = new Scene(reserveLockerParent);
+        
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        
+        window.setScene(ReserveLocker);
+        window.show();
+    }
+    
     @FXML
     public void addData(ActionEvent event) throws IOException{
         
@@ -77,24 +126,7 @@ public class AddCustomerController implements Initializable {
         String idCardNumber_s = idCardNumber.getText();
         String plan_s = plan.getValue().toString();
         planFromAddCustomerController = plan_s;
-        
-        Customer s;
-		
-	EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Database.odb");		
-	EntityManager em = emf.createEntityManager();
-                
-        em.getTransaction().begin();
-        
-        em.getMetamodel().entity(Customer.class); // Query empty database
-                
-        Query q2 = em.createQuery("select Username from Customer");
-        Query q3 = em.createQuery("select max(PrimaryKey) from Customer");
-        Query q6 = em.createQuery("SELECT s FROM Customer s"); 
-        
-        
-        em.close();
-        emf.close(); //close connection before add data
-        
+ 
         Customer b ;
         
         int dummyPrime = 1;
@@ -104,7 +136,7 @@ public class AddCustomerController implements Initializable {
             case "Silver" : b = new Customer_Silver(dummyPrime, name_s, tel_s, email_s, idCardNumber_s, plan_s);    break;
             case "Gold" : b = new Customer_Gold(dummyPrime, name_s, tel_s, email_s, idCardNumber_s, plan_s);    break;
             case "Platinum" : b = new Customer_Platinum(dummyPrime, name_s, tel_s, email_s, idCardNumber_s, plan_s);  break;
-            default :   b = new Customer(dummyPrime ,name_s, tel_s, email_s, idCardNumber_s, plan_s);
+            default :   b = new Customer_Silver(dummyPrime ,name_s, tel_s, email_s, idCardNumber_s, plan_s);
                 
         }
             
@@ -135,19 +167,7 @@ public class AddCustomerController implements Initializable {
 
     }
     
-    public void back(ActionEvent event) throws IOException{
-        
-        Parent reserveLockerParent = FXMLLoader.load(getClass().getResource("ManageCustomer.fxml"));
-        Scene manageCustomer = new Scene(reserveLockerParent);
-        
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
-        window.setScene(manageCustomer);
-        window.show();
-    }
-        
-    
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="336.0" prefWidth="520.0" style="-fx-background-color: #6893DD;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pethotel.PopupSuccessReserveRoomController">
+<AnchorPane id="AnchorPane" prefHeight="336.0" prefWidth="520.0" style="-fx-background-color: #494545;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pethotel.PopupSuccessReserveRoomController">
    <children>
-      <Label layoutX="116.0" layoutY="38.0" prefHeight="42.0" prefWidth="289.0" text="Successful reserve room!!" textFill="#6f0b0b">
+      <Label layoutX="116.0" layoutY="38.0" prefHeight="42.0" prefWidth="289.0" text="Successful reserve room!!" textFill="WHITE">
          <font>
             <Font name="Agency FB" size="34.0" />
          </font>
@@ -19,7 +19,7 @@
             <Image url="@../images/Check-2-icon.png" />
          </image>
       </ImageView>
-      <Button fx:id="ok" layoutX="197.0" layoutY="264.0" mnemonicParsing="false" onAction="#back" prefHeight="57.0" prefWidth="127.0" style="-fx-background-color: #3871C8;" text="OK" textFill="WHITE">
+      <Button fx:id="ok" layoutX="197.0" layoutY="264.0" mnemonicParsing="false" onAction="#back" prefHeight="57.0" prefWidth="127.0" style="-fx-background-color: #323232;" text="OK" textFill="WHITE">
          <font>
             <Font name="Impact" size="30.0" />
          </font>

@@ -6,7 +6,6 @@
 package Pet;
 
 import Customer.Customer;
-import LinkDB.CustomerPetDB;
 import Room.Room;
 import java.io.Serializable;
 import javax.persistence.CascadeType;
@@ -25,7 +24,7 @@ import pethotel.AddPetController;
  * @author natht
  */
 @Entity
-public class Pet implements Serializable {
+public abstract class Pet implements Serializable {
     
     @Id
     private int pet_ID;  // Primary Key
@@ -42,8 +41,7 @@ public class Pet implements Serializable {
     
     private boolean isStay = false;
     
-    @OneToOne(mappedBy = "pets", cascade = CascadeType.ALL,
-           fetch = FetchType.EAGER, optional = false)
+    @OneToOne(cascade = CascadeType.ALL)
     private Customer Owner;
     
     @OneToOne
@@ -148,6 +146,8 @@ public class Pet implements Serializable {
     public void addPet(int owner_ID, String name, String type, String extra, int age){
         Customer c;
         
+        
+        
 	EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Database.odb");		
 	EntityManager em = emf.createEntityManager();
         
@@ -155,7 +155,7 @@ public class Pet implements Serializable {
         c = em.find(Customer.class, owner_ID);
 
             Pet s;
-
+            
             EntityManagerFactory emf2 = Persistence.createEntityManagerFactory("$dist/db/Database.odb");		
             EntityManager em2 = emf2.createEntityManager();
 
@@ -172,7 +172,7 @@ public class Pet implements Serializable {
                     case "Cat" : s = new Cat(1, name, type, extra, age, c);    break;
                     case "Dog" : s = new Dog(1, name, type, extra, age, c);    break;
                     case "Rabbit" : s = new Rabbit(1, name, type, extra, age, c);  break;
-                    default :   s = new Pet(1 , name, type, extra, age, c);
+                    default :   s = new Dog(1 , name, type, extra, age, c);
 
                 }
                 
@@ -188,30 +188,13 @@ public class Pet implements Serializable {
                     case "Cat" : s = new Cat(maxpet_ID+1, name, type, extra, age, c);    break;
                     case "Dog" : s = new Dog(maxpet_ID+1, name, type, extra, age, c);    break;
                     case "Rabbit" : s = new Rabbit(maxpet_ID+1, name, type, extra, age, c);  break;
-                    default :   s = new Pet(maxpet_ID+1 , name, type, extra, age, c);
+                    default :   s = new Dog(maxpet_ID+1 , name, type, extra, age, c);
 
                 }
                 
                 em.persist(s);
                 em.getTransaction().commit();
             }
-//            
-//        /////////////// CustomerPetDB Part ////////////////////////////////////
-//            AddPetController obj;
-//            obj = new AddPetController();
-//
-//            CustomerPetDB obj2;
-//
-//            EntityManagerFactory emf2 = Persistence.createEntityManagerFactory("$dist/db/CustomerPet.odb");		
-//            EntityManager em2 = emf2.createEntityManager();
-//
-//            em2.getTransaction().begin();
-//
-//            obj2 = new CustomerPetDB(obj.primaryKeyFromAddPet,maxpet_ID+1);
-//            em2.persist(obj2);
-//
-//            em2.getTransaction().commit();
-//        ///////////////////////////////////////////////////////////////////////
     }
 
     public void setRoom(Room room) {

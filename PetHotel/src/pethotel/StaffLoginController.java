@@ -37,6 +37,8 @@ public class StaffLoginController implements Initializable {
      * Initializes the controller class.
      */
     
+    public static boolean isAdmin = false;
+    
     @FXML
     private JFXPasswordField staffPassword;
 
@@ -52,11 +54,6 @@ public class StaffLoginController implements Initializable {
         String username = staffUsername.getText().toString();
         String password = staffPassword.getText().toString();
         
-        //String name = "haha"
-
-        
-        Staff s;
-		
 	EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Staff.odb");		
 	EntityManager em = emf.createEntityManager();
                 
@@ -64,28 +61,54 @@ public class StaffLoginController implements Initializable {
         
         Query q2 = em.createQuery("select Username from Staff");
         Query q5 = em.createQuery("SELECT Password FROM Staff s WHERE s.Username = :username", Staff.class);
+        Query q6 = em.createQuery("SELECT Status FROM Staff s WHERE s.Username = :username", Staff.class);
         
         List<Staff> results = q2.getResultList();
         
+        
         if(results.contains(username)){
-            q5.setParameter("username", username).getSingleResult();
-            String temp = q5.setParameter("username", username).getSingleResult().toString();
-            System.out.println(temp);
-            System.out.println(password);
+            if(q6.setParameter("username", username).getSingleResult().toString().contains("Admin")){
+                isAdmin = true;
+                q5.setParameter("username", username).getSingleResult();
+                String temp = q5.setParameter("username", username).getSingleResult().toString();
+                System.out.println(temp);
+                System.out.println(password);
 
-            if(password.equals(temp)){
-                
-                Parent CustomerDetailParent = FXMLLoader.load(getClass().getResource("StaffDashBoard.fxml"));
-                Scene CustomerDetaileScene = new Scene(CustomerDetailParent);
-                Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+                if(password.equals(temp)){
 
-                window.setScene(CustomerDetaileScene);
-                window.show();
-            }
-            else{
-                status.setText("Wrong ID or Password!!");
+                    Parent CustomerDetailParent = FXMLLoader.load(getClass().getResource("StaffDashBoard.fxml"));
+                    Scene CustomerDetaileScene = new Scene(CustomerDetailParent);
+                    Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+                    window.setScene(CustomerDetaileScene);
+                    window.show();
+                }
+                else{
+                    status.setText("Wrong ID or Password!!");
+                }  
+            }else{
+//            
+                q5.setParameter("username", username).getSingleResult();
+                String temp = q5.setParameter("username", username).getSingleResult().toString();
+                System.out.println(temp);
+                System.out.println(password);
+
+                if(password.equals(temp)){
+
+                    Parent CustomerDetailParent = FXMLLoader.load(getClass().getResource("StaffDashBoard.fxml"));
+                    Scene CustomerDetaileScene = new Scene(CustomerDetailParent);
+                    Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+                    window.setScene(CustomerDetaileScene);
+                    window.show();
+                }
+                else{
+                    status.setText("Wrong ID or Password!!");
+                }
             }
         }
+        
+        
         else{
             status.setText("Wrong ID or Password!!");
         }
@@ -94,6 +117,7 @@ public class StaffLoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        isAdmin = false;
     }    
     
 }

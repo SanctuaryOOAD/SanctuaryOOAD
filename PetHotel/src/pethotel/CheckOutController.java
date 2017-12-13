@@ -6,9 +6,7 @@
 package pethotel;
 
 import Customer.Customer;
-import LinkDB.CustomerRoomPetDB;
 import Pet.Pet;
-import Room.Room;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
@@ -39,8 +37,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
-import static pethotel.AddPetController.customerNameFromAddPet;
-import static pethotel.AddPetController.primaryKeyFromAddPet;
+
 
 /**
  * FXML Controller class
@@ -122,65 +119,6 @@ public class CheckOutController implements Initializable {
             window.setScene(StaffDashBoard);
             window.show();
 
-            //getUsername when click at table
-//            int roomNumber_selcted = table.getSelectionModel().getSelectedItem().getRoomNumber();
-//            System.out.println(roomNumber_selcted);
-//            
-//            String roomClass_selcted;
-//            
-//            
-//            
-//            /// get room class ////////
-//            EntityManagerFactory emf0 = Persistence.createEntityManagerFactory("$dist/db/Room.odb");		
-//            EntityManager em0 = emf0.createEntityManager();
-//
-//            em0.getTransaction().begin();
-//            
-//            em0.getMetamodel().entity(Room.class);
-//            Query q0 = em0.createQuery("select roomClass FROM Room s WHERE s.roomNumber = :p");
-//            roomClass_selcted = q0.setParameter("p", roomNumber_selcted).getSingleResult().toString();
-//            ///////////////////////////
-//            
-//            CustomerRoomPetDB Obj;
-//            
-//            EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/CustomerRoomPet.odb");		
-//            EntityManager em = emf.createEntityManager();
-//
-//            em.getTransaction().begin();
-//            
-//            em.getMetamodel().entity(CustomerRoomPetDB.class);
-//            Query q1 = em.createQuery("DELETE FROM CustomerRoomPetDB s WHERE s.roomNumber = :p");
-//            q1.setParameter("p", roomNumber_selcted).executeUpdate();
-//            
-//            em.getTransaction().commit();
-//            //////////////////////////////////////////////////
-//            Room roomObj;
-//            
-//            EntityManagerFactory emf2 = Persistence.createEntityManagerFactory("$dist/db/Room.odb");		
-//            EntityManager em2 = emf2.createEntityManager();
-//
-//            em2.getTransaction().begin();
-//            
-//            em2.getMetamodel().entity(Room.class);
-//            Query q2 = em2.createQuery("DELETE FROM Room s WHERE s.roomNumber = :p");
-//            q2.setParameter("p", roomNumber_selcted).executeUpdate();
-//            
-//            roomObj = new Room(roomNumber_selcted, roomClass_selcted, "Available");
-//            em2.persist(roomObj);
-//
-//            em2.getTransaction().commit();
-            
-
-            //popup more customer detail
-//            Stage stage = new Stage();
-//            Parent root = FXMLLoader.load(getClass().getResource("AddPetPopup.fxml"));
-//            stage.setScene(new Scene(root));
-//            stage.initModality(Modality.APPLICATION_MODAL);
-//            stage.initOwner(table.getScene().getWindow());
-//            stage.showAndWait();
-           
-        
-
         }
         
     }
@@ -195,28 +133,85 @@ public class CheckOutController implements Initializable {
         window.setScene(StaffDashBoard);
         window.show();
     }
+    
+    public void changeToManageCustomer(ActionEvent event) throws IOException{
+        
+        Parent loginCustomerParent = FXMLLoader.load(getClass().getResource("ManageCustomer.fxml"));
+        Scene LoginCustomer = new Scene(loginCustomerParent);
+        
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        
+        window.setScene(LoginCustomer);
+        window.show();
+    }
+    
+    @FXML
+    public void changeToReserveRoom(ActionEvent event) throws IOException{
+        
+        Parent reserveRoom = FXMLLoader.load(getClass().getResource("ReserveRoom.fxml"));
+        Scene ReserveRoom = new Scene(reserveRoom);
+        
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        
+        window.setScene(ReserveRoom);
+        window.show();  
+
+    }
+    
+    @FXML
+    public void changeToCheckOut(ActionEvent event) throws IOException{
+        
+        Parent checkOut = FXMLLoader.load(getClass().getResource("checkOut.fxml"));
+        Scene CheckOut = new Scene(checkOut);
+        
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        
+        window.setScene(CheckOut);
+        window.show();
+    }
+    
+    @FXML
+    public void logOut(ActionEvent event) throws IOException{
+        
+        Parent loginCustomerParent = FXMLLoader.load(getClass().getResource("Welcome.fxml"));
+        Scene LoginCustomer = new Scene(loginCustomerParent);
+        
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        
+        window.setScene(LoginCustomer);
+        window.show();
+    }    
 
     @FXML
     private void searchRoomNo(KeyEvent event){
-        CustomerRoomPetDB s;
+     	
+        Customer s;
 		
-	EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/CustomerRoomPet.odb");		
+	EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Database.odb");		
 	EntityManager em = emf.createEntityManager();
                 
         em.getTransaction().begin();
-        
-        em.getMetamodel().entity(CustomerRoomPetDB.class); // Query empty database
                 
-        Query q1 = em.createQuery("SELECT s FROM CustomerRoomPetDB s");
-        Query q2 = em.createQuery("select Type from CustomerRoomPetDB");
+        Query q1 = em.createQuery("SELECT s FROM Pet s WHERE s.isStay = true", Pet.class);
+
+
+        List<Pet> myList = new ArrayList<Pet>();
+        List<CheckOutTable> CheckoutTbl = new ArrayList<CheckOutTable>();
+        CheckOutTable x ;
+        myList = q1.getResultList();
         
-        List<CustomerRoomPetDB> results = q1.getResultList();
-        ObservableList<CustomerRoomPetDB> results2 = FXCollections.<CustomerRoomPetDB>observableArrayList(results);
+       for(Pet i : myList){
+            x = new CheckOutTable(i);
+            CheckoutTbl.add(x);
+        }
+        
+
+        ObservableList<CheckOutTable> results2 = FXCollections.<CheckOutTable>observableArrayList(CheckoutTbl);
         
         FilteredList filter = new FilteredList(results2, e->true);
         
         roomNoSearch.textProperty().addListener((observable, oldValue, newValue)->{
-            filter.setPredicate((Predicate<? super CustomerRoomPetDB>)(CustomerRoomPetDB std)->{
+            filter.setPredicate((Predicate<? super CheckOutTable>)(CheckOutTable std)->{
 
                 if(newValue.isEmpty() || newValue == null){
                     return true;
@@ -237,29 +232,38 @@ public class CheckOutController implements Initializable {
     @FXML
     private void searchName(KeyEvent event){
 
-        CustomerRoomPetDB s;
+        Customer s;
 		
-	EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/CustomerRoomPet.odb");		
+	EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/Database.odb");		
 	EntityManager em = emf.createEntityManager();
                 
         em.getTransaction().begin();
-        em.getMetamodel().entity(CustomerRoomPetDB.class);
                 
-        Query q1 = em.createQuery("SELECT s FROM CustomerRoomPetDB s");
-        Query q2 = em.createQuery("select Type from CustomerRoomPetDB");
+        Query q1 = em.createQuery("SELECT s FROM Pet s WHERE s.isStay = true", Pet.class);
+
+
+        List<Pet> myList = new ArrayList<Pet>();
+        List<CheckOutTable> CheckoutTbl = new ArrayList<CheckOutTable>();
+        CheckOutTable x ;
+        myList = q1.getResultList();
         
-        List<CustomerRoomPetDB> results = q1.getResultList();
-        ObservableList<CustomerRoomPetDB> results2 = FXCollections.<CustomerRoomPetDB>observableArrayList(results);
+        for(Pet i : myList){
+            x = new CheckOutTable(i);
+            CheckoutTbl.add(x);
+        }
         
-        FilteredList filter2 = new FilteredList(results2, e->true);
+
+        ObservableList<CheckOutTable> results2 = FXCollections.<CheckOutTable>observableArrayList(CheckoutTbl);
+        
+        FilteredList filter = new FilteredList(results2, e->true);
         
         nameSearch.textProperty().addListener((observable, oldValue, newValue)->{
-            filter2.setPredicate((Predicate<? super CustomerRoomPetDB>)(CustomerRoomPetDB std)->{
+            filter.setPredicate((Predicate<? super CheckOutTable>)(CheckOutTable std)->{
 
                 if(newValue.isEmpty() || newValue == null){
                     return true;
                 }
-                else if(std.getCustomerName().contains(newValue)){
+                else if(String.valueOf(std.getName()).contains(newValue)){
                     return true;
                 }
 
@@ -267,18 +271,13 @@ public class CheckOutController implements Initializable {
             });
         });
         
-        SortedList sort2 = new SortedList(filter2);
-        sort2.comparatorProperty().bind(table.comparatorProperty());
-        table.setItems(filter2);
+        SortedList sort = new SortedList(filter);
+        sort.comparatorProperty().bind(table.comparatorProperty());
+        table.setItems(filter);
     }    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-
-        
-//        List<String> cusNameList = new ArrayList<>();
-        List<Integer> pet_id = new ArrayList<>();
         
         roomNumber.setCellValueFactory(new PropertyValueFactory<>("roomNumber"));
         name.setCellValueFactory(new PropertyValueFactory<CheckOutTable , String>("name"));
@@ -295,147 +294,23 @@ public class CheckOutController implements Initializable {
         em.getTransaction().begin();
                 
         Query q1 = em.createQuery("SELECT s FROM Pet s WHERE s.isStay = true", Pet.class);
-//        Query q2 = em.createQuery("SELECT email FROM Customer s WHERE s.primaryKey = :PrimaryKey", Customer.class);
-//        Query q3 = em.createQuery("SELECT tel FROM Customer s WHERE s.primaryKey = :PrimaryKey", Customer.class);
-//        Query q4 = em.createQuery("SELECT idcardNumber FROM Customer s WHERE s.primaryKey = :PrimaryKey", Customer.class);
-//        Query q5 = em.createQuery("SELECT plan FROM Customer s WHERE s.primaryKey = :PrimaryKey", Customer.class);
-        
-        //Search pet_ID that has Primary Key = PrimaryKey -- return List and store in myList
+
 
         List<Pet> myList = new ArrayList<Pet>();
         List<CheckOutTable> CheckoutTbl = new ArrayList<CheckOutTable>();
-        List<CheckOutTable> sortTbl = new ArrayList<CheckOutTable>();
         CheckOutTable x ;
-        int sort[];
         myList = q1.getResultList();
         
-        for( Pet i : myList){
-            
-        }
-        
-        for(Pet i : myList){
+       for(Pet i : myList){
             x = new CheckOutTable(i);
             CheckoutTbl.add(x);
         }
         
-        
-        
-        
-        
+
         ObservableList<CheckOutTable> results2 = FXCollections.<CheckOutTable>observableArrayList(CheckoutTbl);
         table.setItems(results2);
 
-       
-        
-        
-        
-        
-//        Pet a;
-//	EntityManagerFactory emf2 = Persistence.createEntityManagerFactory("$dist/db/Database.odb");		
-//	EntityManager em2 = emf2.createEntityManager();
-//        
-//        em2.getTransaction().begin();
-//        
-//        Query q7 = em2.createQuery("select s from Pet s where s.pet_ID = :p", Pet.class);
-//	Query q8 = em2.createQuery("select name from Pet s where s.pet_ID = :p", Pet.class);	
-//        Query q9 = em2.createQuery("select animal from Pet s where s.pet_ID = :p", Pet.class);
-//        Query q10 = em2.createQuery("select age from Pet s where s.pet_ID = :p", Pet.class);
-//        Query q11 = em2.createQuery("select extra from Pet s where s.pet_ID = :p", Pet.class);
-//        
-//        //create ObservableList names obs for create Tableview
-//        ObservableList<CusPet> obs = FXCollections.observableArrayList();
-//        
-//        a.get
-//      
-//        //This loop for add object (obs) to CusPet(Class for create table) following amount of myArray.length
-//        //วนลูปเพิ่มค่าใน class CusPet เพื่อสร้างตารางโดยเฉพาะ ตามจำนวน pet_ID ที่มี (ตามจำนวนสัตว์ที่ customer มี)
-//        for(int i=0;i<myArray.length;i++){
-//            
-////            System.out.println(q8.setParameter("p", myArray[i]).getSingleResult());
-////            System.out.println(q9.setParameter("p", myArray[i]).getSingleResult());
-////            System.out.println(q10.setParameter("p", myArray[i]).getSingleResult());
-////            System.out.println(q11.setParameter("p", myArray[i]).getSingleResult());
-//            
-//            obs.add(new CheckOutTable();
-//
-//        }
-//        
-//        table.setItems(obs);
 
-        
-        ////////////////// Table //////////////////////////////////
-        
-    
-//        Pet b;
-//	EntityManagerFactory emf5 = Persistence.createEntityManagerFactory("$dist/db/Database.odb");		
-//	EntityManager em5 = emf5.createEntityManager();
-//        
-//        em5.getTransaction().begin();
-//        int kk = pet_id.size();
-//        System.out.println("kkkkkkkk");
-//        System.out.println(kk);
-        //Search pet_ID that has Primary Key = PrimaryKey -- return List and store in myList
-//        em5.find(Pet.class, pet_id.size())
-        
-
-//        List<String> myList = new ArrayList<String>();
-//        
-//        myList = q6.setParameter("PrimaryKey", ShowCustomerListController.primaryKeyFromshowmore).getResultList();
-//        //create myArray that converted myList (List) to myArray (Array
-//        Object[] myArray = myList.toArray();
-//        for (Object myObject : myArray) {
-//           System.out.println(myObject);
-//        }
-//        
-//        
-//        Pet a;
-//	EntityManagerFactory emf2 = Persistence.createEntityManagerFactory("$dist/db/Pet.odb");		
-//	EntityManager em2 = emf2.createEntityManager();
-//        
-//        em2.getTransaction().begin();
-//        
-//        Query q7 = em2.createQuery("select s from Pet s where s.pet_ID = :p", Pet.class);
-//	Query q8 = em2.createQuery("select name from Pet s where s.pet_ID = :p", Pet.class);	
-//        Query q9 = em2.createQuery("select animal from Pet s where s.pet_ID = :p", Pet.class);
-//        Query q10 = em2.createQuery("select age from Pet s where s.pet_ID = :p", Pet.class);
-//        Query q11 = em2.createQuery("select extra from Pet s where s.pet_ID = :p", Pet.class);
-//        
-//        //create ObservableList names obs for create Tableview
-//        ObservableList<CusPet> obs = FXCollections.observableArrayList();
-//      
-//        //This loop for add object (obs) to CusPet(Class for create table) following amount of myArray.length
-//        //วนลูปเพิ่มค่าใน class CusPet เพื่อสร้างตารางโดยเฉพาะ ตามจำนวน pet_ID ที่มี (ตามจำนวนสัตว์ที่ customer มี)
-//        for(int i=0;i<myArray.length;i++){
-//            
-////            System.out.println(q8.setParameter("p", myArray[i]).getSingleResult());
-////            System.out.println(q9.setParameter("p", myArray[i]).getSingleResult());
-////            System.out.println(q10.setParameter("p", myArray[i]).getSingleResult());
-////            System.out.println(q11.setParameter("p", myArray[i]).getSingleResult());
-//            
-//            obs.add(new CusPet(q8.setParameter("p", myArray[i]).getSingleResult().toString(),
-//                               q9.setParameter("p", myArray[i]).getSingleResult().toString(),
-//                               q11.setParameter("p", myArray[i]).getSingleResult().toString(),
-//                               (int)q10.setParameter("p", myArray[i]).getSingleResult()));
-//
-//        }
-//        
-//        table.setItems(obs);   
-        
-//        CustomerRoomPetDB s;
-//		
-//	EntityManagerFactory emf = Persistence.createEntityManagerFactory("$dist/db/CustomerRoomPet.odb");		
-//	EntityManager em = emf.createEntityManager();
-//                
-//        em.getTransaction().begin();
-//        
-//        em.getMetamodel().entity(CustomerRoomPetDB.class);      
-//        Query q1 = em.createQuery("SELECT s FROM CustomerRoomPetDB s");
-//
-//        List<CustomerRoomPetDB> results = q1.getResultList();
-//
-//        ObservableList<CustomerRoomPetDB> obs = FXCollections.<CustomerRoomPetDB>observableArrayList(results);
-//        table.setItems(obs);
-//        
     } 
     
     
